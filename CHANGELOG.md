@@ -5,6 +5,11 @@ All notable changes to OxiGeo will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- `oxigeo-gpkg`: GeoPackageBinary flags now follow OGC GeoPackage Encoding Standard §2.1.3 Table 5 (`R R X Y E E E B`). The parser previously treated bits 0–2 as the envelope indicator, bit 3 as empty, and bit 5 as endianness, so a QGIS/GDAL blob with flags `0x05` (little-endian header plus an XYZ envelope) was rejected as envelope indicator 5. `GpkgBinaryParser::parse` / `to_gpb` and `encode_gpkg_point` now use bit 0 for header endianness, bits 1–3 for the envelope, and bit 4 for empty. WKB decoding is unchanged. Regression tests cover a QGIS-style `0x05` MultiLineStringZ blob and the spec `0x01` encoder flags byte.
+
 ## [0.2.4] - 2026-08-18
 
 ### Added

@@ -91,16 +91,19 @@ pub const WKB_EWKB_ZM_HIGHBIT: u32 = 0xC000_0000;
 
 /// Parser and encoder for the GeoPackageBinary (GPB) and WKB geometry formats.
 ///
-/// The GeoPackageBinary layout is:
+/// The GeoPackageBinary layout follows OGC GeoPackage Encoding Standard
+/// §2.1.3 / Table 5:
 ///
 /// ```text
 /// magic[2]     = 0x47 0x50  ("GP")
 /// version[1]
-/// flags[1]     bits 0-2: envelope indicator
-///              bit  3:   empty-geometry flag
-///              bit  5:   byte order (0=BE, 1=LE)
-/// srs_id[4]    i32, same byte order as flags bit 5
-/// envelope     0/32/48/64 bytes depending on flags bits 0-2
+/// flags[1]     bit  0:   B byte order of srs_id and envelope (0=BE, 1=LE)
+///              bits 1-3: E envelope contents indicator (0..=4)
+///              bit  4:   Y empty-geometry flag
+///              bit  5:   X GeoPackageBinary type (0=standard, 1=extended)
+///              bits 6-7: R reserved (0)
+/// srs_id[4]    i32, endianness from flags bit 0
+/// envelope     0/32/48/64 bytes depending on flags bits 1-3
 /// WKB          remainder of the blob
 /// ```
 pub struct GpkgBinaryParser;
@@ -124,9 +127,10 @@ impl GpkgBinaryParser {
         }
 
         let flags = data[3];
-        let is_little_endian = (flags >> 5) & 1 == 1;
-        let envelope_indicator = flags & 0b0000_0111;
-        let empty_flag = (flags >> 3) & 1 == 1;
+        // OGC Table 5: R R X Y E E E B
+        let is_little_endian = flags & 1 == 1;
+        let envelope_indicator = (flags >> 1) & 0b111;
+        let empty_flag = (flags >> 4) & 1 == 1;
 
         let _srs_id: i32 = if is_little_endian {
             i32::from_le_bytes([data[4], data[5], data[6], data[7]])
@@ -134,17 +138,7 @@ impl GpkgBinaryParser {
             i32::from_be_bytes([data[4], data[5], data[6], data[7]])
         };
 
-        let envelope_bytes: usize = match envelope_indicator {
-            0 => 0,
-            1 => 32,
-            2 | 3 => 48,
-            4 => 64,
-            _ => {
-                return Err(GpkgError::WkbParseError(format!(
-                    "Unknown envelope indicator {envelope_indicator}"
-                )));
-            }
-        };
+        let envelope_bytes = envelope_len(envelope_indicator)?;
 
         let header_size = 8 + envelope_bytes;
         if data.len() < header_size {
@@ -185,14 +179,27 @@ impl GpkgBinaryParser {
         buf.push(0x50);
         buf.push(0);
         let is_empty = matches!(geom, GpkgGeometry::Empty);
-        let empty_bit: u8 = if is_empty { 1 << 3 } else { 0 };
-        let flags: u8 = empty_bit | (1 << 5);
+        // OGC Table 5: bit 0 = little-endian header, bit 4 = empty, no envelope.
+        let empty_bit: u8 = if is_empty { 1 << 4 } else { 0 };
+        let flags: u8 = empty_bit | 1;
         buf.push(flags);
         buf.extend_from_slice(&srs_id.to_le_bytes());
         if !is_empty {
             write_wkb(geom, &mut buf);
         }
         buf
+    }
+}
+
+fn envelope_len(indicator: u8) -> Result<usize, GpkgError> {
+    match indicator {
+        0 => Ok(0),
+        1 => Ok(32),
+        2 | 3 => Ok(48),
+        4 => Ok(64),
+        other => Err(GpkgError::WkbParseError(format!(
+            "Unknown envelope indicator {other}"
+        ))),
     }
 }
 

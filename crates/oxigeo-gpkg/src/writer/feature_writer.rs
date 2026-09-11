@@ -9,23 +9,23 @@
 // GeoPackage Binary header (GPB)
 // ─────────────────────────────────────────────────────────────────────────────
 //
-// Byte layout:
+// Byte layout (OGC GeoPackage Encoding Standard v1.3.1 §2.1.3 Table 5):
 //   0-1  magic = 0x47 0x50  ('G', 'P')
 //   2    version = 0x00
 //   3    flags:
-//          bits 0-2  envelope indicator (0 = no envelope)
-//          bit  3    empty-geometry flag (0 = not empty)
-//          bit  4    reserved (0)
-//          bit  5    byte-order (1 = little-endian WKB)
-//          bits 6-7  reserved (0)
-//   4-7  srs_id (little-endian i32)
+//          bit  0    B  byte order of srs_id and envelope (1 = little-endian)
+//          bits 1-3  E  envelope contents indicator (0 = no envelope)
+//          bit  4    Y  empty-geometry flag (0 = not empty)
+//          bit  5    X  GeoPackageBinary type (0 = standard)
+//          bits 6-7  R  reserved (0)
+//   4-7  srs_id (endianness from flags bit 0)
 //   [8+] WKB body
 //
-// Minimum flags byte for a non-empty 2-D point with no envelope, LE WKB:
-//   0b0010_0001 = 0x21   (little-endian, no envelope, not empty)
+// Minimum flags byte for a non-empty 2-D point with no envelope, LE header:
+//   0b0000_0001 = 0x01
 
-/// GPB flags byte: little-endian WKB, no envelope, not empty.
-const GPB_FLAGS_LE_NO_ENV: u8 = 1 << 5; // bit 5 = LE
+/// GPB flags byte: little-endian header, no envelope, not empty.
+const GPB_FLAGS_LE_NO_ENV: u8 = 0x01;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // WKB constants
@@ -49,7 +49,7 @@ const WKB_POINT_LE: [u8; 4] = 1u32.to_le_bytes();
 /// ```text
 /// [0..2]   magic bytes (0x47, 0x50)
 /// [2]      version (0x00)
-/// [3]      flags (0x20 = LE, no envelope, not empty)
+/// [3]      flags (0x01 = LE header, no envelope, not empty)
 /// [4..8]   srs_id (little-endian i32)
 /// [8]      WKB byte order (0x01 = LE)
 /// [9..13]  WKB type = 1 (Point), little-endian u32
