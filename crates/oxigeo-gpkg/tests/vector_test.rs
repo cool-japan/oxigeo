@@ -419,6 +419,55 @@ fn parse_gpb_too_short_returns_error() {
     assert!(result.is_err());
 }
 
+#[test]
+fn to_gpb_writes_ogc_little_endian_no_envelope_flag() {
+    let gpb = GpkgBinaryParser::to_gpb(&GpkgGeometry::Point { x: 1.0, y: 2.0 }, 4326);
+    assert_eq!(
+        gpb[3], 0x01,
+        "OGC Table 5: bit 0 = LE header, bits 1-3 = no envelope"
+    );
+    let empty = GpkgBinaryParser::to_gpb(&GpkgGeometry::Empty, 4326);
+    assert_eq!(
+        empty[3], 0x11,
+        "OGC Table 5: bit 0 = LE header, bit 4 = empty"
+    );
+}
+
+#[test]
+fn parse_gpb_qgis_xyz_envelope_multilinestringz() {
+    // QGIS/GDAL flags 0x05 = LE header (bit 0) + XYZ envelope indicator 2 (bits 1-3).
+    // The previous bit layout treated 0x05 as envelope indicator 5 and rejected the blob.
+    let geom = GpkgGeometry::MultiLineStringZ {
+        lines: vec![vec![
+            (208663.89, 474797.28, 0.0),
+            (208654.51, 474793.42, 0.0),
+        ]],
+    };
+    let wkb = GpkgBinaryParser::to_wkb(&geom);
+    let mut blob = vec![0x47, 0x50, 0x00, 0x05];
+    blob.extend_from_slice(&28992i32.to_le_bytes());
+    blob.extend(std::iter::repeat_n(0u8, 48)); // dummy XYZ envelope
+    blob.extend(wkb);
+
+    let decoded = GpkgBinaryParser::parse(&blob).expect("QGIS-style GPB with XYZ envelope");
+    assert_eq!(decoded, geom);
+}
+
+#[test]
+fn parse_gpb_qgis_xy_envelope_linestring() {
+    let geom = GpkgGeometry::LineString {
+        coords: vec![(1.0, 2.0), (3.0, 4.0)],
+    };
+    let wkb = GpkgBinaryParser::to_wkb(&geom);
+    let mut blob = vec![0x47, 0x50, 0x00, 0x03]; // LE + XY envelope
+    blob.extend_from_slice(&28992i32.to_le_bytes());
+    blob.extend(std::iter::repeat_n(0u8, 32));
+    blob.extend(wkb);
+
+    let decoded = GpkgBinaryParser::parse(&blob).expect("QGIS-style GPB with XY envelope");
+    assert_eq!(decoded, geom);
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GpkgGeometry::geometry_type
 // ─────────────────────────────────────────────────────────────────────────────
