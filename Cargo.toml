@@ -209,16 +209,16 @@ parquet = { version = "59", default-features = false }
 # Use oxiarc-* crates instead of C-based compression libraries
 # Updated to 0.2.8: rs3gw 0.2.1 requires oxiarc-deflate/lz4 ^0.2.8 which in turn
 # needs oxiarc-core 0.2.8 for OutputRingBuffer::{ring_snapshot,drain_output,restore_ring}
-oxiarc-archive = "0.4.1"  # ZIP, TAR, GZIP, LZH, XZ archive formats
-oxiarc-core = "0.4.1"     # Core components for OxiArc
-oxiarc-deflate = "0.4.1"  # Pure Rust DEFLATE (replacement for flate2)
-oxiarc-lzw = "0.4.1"      # Pure Rust LZW compression
-oxiarc-lz4 = "0.4.1"      # Pure Rust LZ4 compression
-oxiarc-zstd = "0.4.1"     # Pure Rust Zstandard compression
-oxiarc-bzip2 = "0.4.1"    # Pure Rust BZip2 compression
-oxiarc-lzhuf = "0.4.1"    # Pure Rust LZH compression
-oxiarc-snappy = "0.4.1"   # Pure Rust Snappy compression (replacement for snap)
-oxiarc-brotli = "0.4.1"   # Pure Rust Brotli compression (replacement for brotli)
+oxiarc-archive = "0.4.2"  # ZIP, TAR, GZIP, LZH, XZ archive formats
+oxiarc-core = "0.4.2"     # Core components for OxiArc
+oxiarc-deflate = "0.4.2"  # Pure Rust DEFLATE (replacement for flate2)
+oxiarc-lzw = "0.4.2"      # Pure Rust LZW compression
+oxiarc-lz4 = "0.4.2"      # Pure Rust LZ4 compression
+oxiarc-zstd = "0.4.2"     # Pure Rust Zstandard compression
+oxiarc-bzip2 = "0.4.2"    # Pure Rust BZip2 compression
+oxiarc-lzhuf = "0.4.2"    # Pure Rust LZH compression
+oxiarc-snappy = "0.4.2"   # Pure Rust Snappy compression (replacement for snap)
+oxiarc-brotli = "0.4.2"   # Pure Rust Brotli compression (replacement for brotli)
 
 jpeg-decoder = "0.3"
 jpeg-encoder = "0.7"
