@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-dev-tools"
 readme = "README.md"
 description = "Development tools for OxiGeo: profiling, debugging, validation, and testing utilities"
 keywords = ["gis", "science", "development", "profiling", "testing"]
-categories = ["science::geo", "development-tools", "development-tools::profiling"]
+categories = ["science::geo", "development-tools::profiling"]
 
 [features]
 default = []
