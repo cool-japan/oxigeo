@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-qc"
 readme = "README.md"
 keywords = ["gdal", "science", "gis", "quality", "validation"]
-categories = ["science", "data-structures"]
+categories = ["science::geo", "data-structures"]
 
 [features]
 default = ["std", "html"]

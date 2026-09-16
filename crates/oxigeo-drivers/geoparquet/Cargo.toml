@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-geoparquet"
 readme = "README.md"
 keywords = ["geoparquet", "parquet", "arrow", "vector", "gdal"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std"]

@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-proj"
 readme = "README.md"
 keywords = ["gdal", "projection", "crs", "coordinate", "transform"]
-categories = ["science", "algorithms"]
+categories = ["science::geo", "algorithms"]
 
 # Architecture: OxiProj (pure Rust) is the default engine, pulled in by the `std`
 # feature (which `default` enables). `--no-default-features` builds are no_std +

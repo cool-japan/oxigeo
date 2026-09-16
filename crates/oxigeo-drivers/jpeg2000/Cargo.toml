@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-jpeg2000"
 readme = "README.md"
 keywords = ["jpeg2000", "jp2", "j2k", "jpx", "codec"]
-categories = ["science", "parser-implementations", "multimedia::images"]
+categories = ["science::geo", "parser-implementations", "multimedia::images"]
 
 [features]
 default = ["std"]

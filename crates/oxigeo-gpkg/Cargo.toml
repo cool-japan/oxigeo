@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-gpkg"
 readme = "README.md"
 keywords = ["geopackage", "gpkg", "sqlite", "gis", "geospatial"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std", "geojson-convert"]

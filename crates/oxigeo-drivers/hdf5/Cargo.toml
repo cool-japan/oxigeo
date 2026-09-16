@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-hdf5"
 readme = "README.md"
 keywords = ["hdf5", "scientific", "science", "array", "gdal"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std"]

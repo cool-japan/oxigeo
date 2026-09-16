@@ -10,7 +10,7 @@ documentation = "https://docs.rs/oxigeo-ha"
 readme = "README.md"
 rust-version.workspace = true
 keywords = ["gis", "gdal", "high-availability", "disaster-recovery", "failover"]
-categories = ["science", "database", "concurrency"]
+categories = ["science::geo", "database", "concurrency"]
 description = "High availability, disaster recovery, and automatic failover for OxiGeo"
 
 [dependencies]

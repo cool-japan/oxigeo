@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-ws"
 readme = "README.md"
 description = "WebSocket streaming support for OxiGeo - real-time geospatial data delivery"
 keywords = ["websocket", "science", "streaming", "gdal", "real-time"]
-categories = ["web-programming::websocket", "science", "network-programming"]
+categories = ["web-programming::websocket", "science::geo", "network-programming"]
 
 [dependencies]
 # Workspace dependencies

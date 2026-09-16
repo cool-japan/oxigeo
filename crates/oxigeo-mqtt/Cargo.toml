@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-mqtt"
 readme = "README.md"
 keywords = ["mqtt", "iot", "science", "telemetry", "sensors"]
-categories = ["network-programming", "science", "asynchronous"]
+categories = ["network-programming", "science::geo", "asynchronous"]
 
 [features]
 default = ["std", "mqtt5"]

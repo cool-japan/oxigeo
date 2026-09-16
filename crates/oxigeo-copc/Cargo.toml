@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-copc"
 readme = "README.md"
 keywords = ["copc", "lidar", "pointcloud", "las", "gis"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std"]

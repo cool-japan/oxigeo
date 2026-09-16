@@ -10,7 +10,7 @@ documentation = "https://docs.rs/oxigeo-security"
 rust-version.workspace = true
 readme = "README.md"
 keywords = ["security", "encryption", "access-control", "compliance", "audit"]
-categories = ["cryptography", "authentication", "science"]
+categories = ["cryptography", "authentication", "science::geo"]
 description = "Enterprise security features for OxiGeo: encryption, access control, compliance"
 
 [features]

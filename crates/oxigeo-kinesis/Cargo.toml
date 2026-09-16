@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-kinesis"
 readme = "README.md"
 keywords = ["kinesis", "streaming", "aws", "real-time", "analytics"]
-categories = ["science", "network-programming", "asynchronous", "database"]
+categories = ["science::geo", "network-programming", "asynchronous", "database"]
 
 [features]
 default = ["std"]

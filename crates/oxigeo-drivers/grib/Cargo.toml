@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-grib"
 readme = "README.md"
 keywords = ["grib", "meteorology", "weather", "forecast", "gdal"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std", "grib1", "grib2", "jpeg2000"]

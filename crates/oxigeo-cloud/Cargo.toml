@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-cloud"
 readme = "README.md"
 keywords = ["network-programming", "storage", "s3", "azure", "gcs"]
-categories = ["science", "network-programming", "asynchronous", "caching"]
+categories = ["science::geo", "network-programming", "asynchronous", "caching"]
 
 [features]
 default = ["std", "retry", "cache"]

@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-postgis"
 readme = "README.md"
 keywords = ["gdal", "science", "gis", "postgis", "postgresql"]
-categories = ["science", "database"]
+categories = ["science::geo", "database"]
 
 [features]
 default = []

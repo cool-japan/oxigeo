@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-ml"
 readme = "README.md"
 keywords = ["gdal", "science", "algorithms", "onnx", "ml"]
-categories = ["science", "graphics"]
+categories = ["science::geo", "graphics"]
 
 [features]
 default = ["std"]

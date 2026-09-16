@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-cli"
 readme = "README.md"
 description = "Command-line interface for OxiGeo geospatial operations"
 keywords = ["gis", "science", "gdal", "cli", "raster"]
-categories = ["command-line-utilities", "science"]
+categories = ["command-line-utilities", "science::geo"]
 
 [dependencies]
 # Internal dependencies

@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-3d"
 readme = "README.md"
 description = "3D visualization, point clouds, and terrain mesh support for OxiGeo"
 keywords = ["gis", "science", "3d", "pointcloud", "mesh"]
-categories = ["science", "graphics", "visualization"]
+categories = ["science::geo", "graphics", "visualization"]
 
 [dependencies]
 # Workspace dependencies

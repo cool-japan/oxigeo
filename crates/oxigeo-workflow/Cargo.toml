@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-workflow"
 readme = "README.md"
 description = "DAG-based workflow engine for complex geospatial processing pipelines"
 keywords = ["science", "workflow", "dag", "pipeline", "orchestration"]
-categories = ["science", "asynchronous", "data-structures"]
+categories = ["science::geo", "asynchronous", "data-structures"]
 
 [dependencies]
 # Core dependencies

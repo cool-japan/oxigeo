@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-drivers-advanced"
 readme = "README.md"
 description = "Advanced geospatial format drivers for OxiGeo (JPEG2000, GeoPackage, KML/KMZ, GML)"
 keywords = ["geospatial", "gdal", "gis", "geopackage", "drivers"]
-categories = ["science", "encoding", "parser-implementations"]
+categories = ["science::geo", "encoding", "parser-implementations"]
 
 [dependencies]
 # Core

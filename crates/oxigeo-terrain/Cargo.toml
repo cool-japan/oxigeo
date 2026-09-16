@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-terrain"
 readme = "README.md"
 keywords = ["gdal", "science", "gis", "terrain", "dem"]
-categories = ["science", "algorithms", "graphics"]
+categories = ["science::geo", "algorithms", "graphics"]
 
 [features]
 default = ["std", "derivatives", "hydrology"]

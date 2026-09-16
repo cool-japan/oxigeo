@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-geotiff"
 readme = "README.md"
 keywords = ["geotiff", "cog", "tiff", "raster", "gdal"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std", "deflate", "lzw"]

@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-offline"
 readme = "README.md"
 description = "Offline-first data management with sync queue, conflict resolution, and optimistic updates for OxiGeo"
 keywords = ["offline", "sync", "conflict-resolution", "indexeddb", "sqlite"]
-categories = ["database", "wasm", "caching", "asynchronous"]
+categories = ["database", "wasm", "caching", "asynchronous", "science::geo"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]

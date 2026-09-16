@@ -10,7 +10,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-query"
 readme = "README.md"
 keywords = ["science", "query", "sql", "optimization", "gis"]
-categories = ["database", "parser-implementations", "data-structures"]
+categories = ["database", "parser-implementations", "data-structures", "science::geo"]
 description = "SQL-like query language and cost-based optimizer for geospatial data"
 
 [dependencies]

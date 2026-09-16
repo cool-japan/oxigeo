@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-gpu-advanced"
 readme = "README.md"
 description = "Advanced GPU computing with multi-GPU support, memory pooling, and shader optimization for OxiGeo"
 keywords = ["gis", "gdal", "gpu", "multi-gpu", "wgpu"]
-categories = ["science", "graphics", "rendering", "concurrency"]
+categories = ["science::geo", "graphics", "rendering", "concurrency"]
 
 [features]
 default = ["auto-backend"]

@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-mobile-enhanced"
 readme = "README.md"
 description = "Mobile platform performance optimizations for iOS and Android - battery efficiency, network optimization, and mobile-specific features"
 keywords = ["science", "mobile", "optimization", "ios", "android"]
-categories = ["science", "embedded", "api-bindings"]
+categories = ["science::geo", "embedded", "api-bindings"]
 
 [features]
 default = ["std"]

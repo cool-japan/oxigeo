@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-algorithms"
 readme = "README.md"
 keywords = ["gdal", "science", "gis", "raster", "algorithms"]
-categories = ["science", "algorithms"]
+categories = ["science::geo", "algorithms"]
 
 [features]
 default = ["std", "simd", "dsl"]

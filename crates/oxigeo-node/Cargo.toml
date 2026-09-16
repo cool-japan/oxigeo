@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-node"
 readme = "README.md"
 description = "Node.js bindings for OxiGeo - Pure Rust geospatial data abstraction library"
 keywords = ["science", "gdal", "raster", "gis", "nodejs"]
-categories = ["science", "api-bindings"]
+categories = ["science::geo", "api-bindings"]
 
 [lib]
 name = "oxigeo_node"

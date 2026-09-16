@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-compress"
 readme = "README.md"
 description = "Advanced compression codecs and auto-selection for geospatial data"
 keywords = ["compression", "science", "codec", "zstd", "lz4"]
-categories = ["compression", "science", "encoding"]
+categories = ["compression", "science::geo", "encoding"]
 
 [dependencies]
 # Workspace dependencies

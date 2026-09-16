@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-edge"
 readme = "README.md"
 description = "Edge computing platform for OxiGeo with offline-first architecture and minimal footprint"
 keywords = ["edge", "iot", "embedded", "offline", "science"]
-categories = ["embedded", "science", "network-programming"]
+categories = ["embedded", "science::geo", "network-programming"]
 
 [dependencies]
 # Core dependencies

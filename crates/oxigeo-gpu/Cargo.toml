@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-gpu"
 readme = "README.md"
 description = "GPU-accelerated geospatial operations for OxiGeo using WGPU"
 keywords = ["gis", "gdal", "gpu", "wgpu", "science"]
-categories = ["science", "graphics", "rendering"]
+categories = ["science::geo", "graphics", "rendering"]
 
 [features]
 default = ["auto-backend"]

@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-mobile"
 readme = "README.md"
 keywords = ["gdal", "science", "mobile", "ios", "android"]
-categories = ["science", "api-bindings", "external-ffi-bindings"]
+categories = ["science::geo", "api-bindings", "external-ffi-bindings"]
 
 [lib]
 # cdylib and staticlib are only needed for mobile deployment builds

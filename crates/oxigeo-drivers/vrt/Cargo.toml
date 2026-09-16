@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-vrt"
 readme = "README.md"
 keywords = ["vrt", "virtual", "raster", "mosaic", "gdal"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std"]

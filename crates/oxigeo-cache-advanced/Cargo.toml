@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-cache-advanced"
 readme = "README.md"
 description = "Advanced multi-tier caching with predictive prefetching and ML-based optimization for OxiGeo"
 keywords = ["cache", "science", "prefetch", "ml", "distributed"]
-categories = ["caching", "algorithms", "science"]
+categories = ["caching", "algorithms", "science::geo"]
 
 [dependencies]
 # Core dependencies

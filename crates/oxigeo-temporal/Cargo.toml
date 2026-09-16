@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-temporal"
 readme = "README.md"
 keywords = ["gdal", "science", "timeseries", "temporal", "datacube"]
-categories = ["science", "algorithms", "data-structures"]
+categories = ["science::geo", "algorithms", "data-structures"]
 
 [features]
 default = [

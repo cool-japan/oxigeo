@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 description = "no_std, no_alloc fixed-size geometry primitives for OxiGeo"
 keywords = ["geospatial", "geometry", "no_std", "embedded"]
-categories = ["no-std", "science"]
+categories = ["no-std", "science::geo"]
 
 [features]
 default = []

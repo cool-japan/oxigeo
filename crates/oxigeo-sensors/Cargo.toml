@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-sensors"
 readme = "README.md"
 keywords = ["gdal", "science", "remote-sensing", "satellite", "sensors"]
-categories = ["science", "algorithms"]
+categories = ["science::geo", "algorithms"]
 
 [features]
 default = ["std"]

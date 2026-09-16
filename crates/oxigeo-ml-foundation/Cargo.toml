@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-ml-foundation"
 readme = "README.md"
 keywords = ["gdal", "science", "deep-learning", "training", "transfer-learning"]
-categories = ["science", "graphics", "algorithms"]
+categories = ["science::geo", "graphics", "algorithms"]
 
 [features]
 default = ["std"]

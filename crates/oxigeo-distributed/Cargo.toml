@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-distributed"
 readme = "README.md"
 description = "Distributed processing capabilities for OxiGeo using Apache Arrow Flight"
 keywords = ["science", "distributed", "arrow-flight", "rpc", "gis"]
-categories = ["science", "network-programming", "concurrency"]
+categories = ["science::geo", "network-programming", "concurrency"]
 
 [dependencies]
 # Core dependencies

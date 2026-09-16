@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 description = "Pure-Rust streaming GeoJSON reader and writer for OxiGeo"
 keywords = ["geospatial", "geojson", "streaming", "vector"]
-categories = ["science", "parser-implementations"]
+categories = ["science::geo", "parser-implementations"]
 
 [features]
 reproject = ["dep:oxigeo-proj"]

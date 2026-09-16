@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-wasm-geoparquet"
 readme = "README.md"
 keywords = ["wasm", "geoparquet", "parquet", "geospatial", "browser"]
-categories = ["wasm", "science", "web-programming"]
+categories = ["wasm", "science::geo", "web-programming"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]

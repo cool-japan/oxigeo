@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-jupyter"
 readme = "README.md"
 description = "Jupyter integration for OxiGeo with interactive widgets and visualization"
 keywords = ["gis", "science", "jupyter", "notebook", "visualization"]
-categories = ["science", "visualization", "development-tools"]
+categories = ["science::geo", "visualization", "development-tools"]
 
 [dependencies]
 # Internal dependencies

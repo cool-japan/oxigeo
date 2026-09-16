@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-mbtiles"
 readme = "README.md"
 keywords = ["mbtiles", "tiles", "gis", "mapbox", "geospatial"]
-categories = ["science", "parser-implementations", "encoding"]
+categories = ["science::geo", "parser-implementations", "encoding"]
 
 [features]
 default = ["std"]

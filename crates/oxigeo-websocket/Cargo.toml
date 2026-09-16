@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-websocket"
 readme = "README.md"
 description = "Advanced real-time WebSocket communication for OxiGeo with broadcasting, pub/sub, and live updates"
 keywords = ["websocket", "science", "real-time", "broadcast", "pubsub"]
-categories = ["web-programming::websocket", "science", "network-programming", "asynchronous"]
+categories = ["web-programming::websocket", "science::geo", "network-programming", "asynchronous"]
 
 [dependencies]
 # Workspace dependencies

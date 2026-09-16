@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-pubsub"
 readme = "README.md"
 keywords = ["pubsub", "messaging", "streaming", "network-programming", "google"]
-categories = ["science", "network-programming", "asynchronous", "database"]
+categories = ["science::geo", "network-programming", "asynchronous", "database"]
 
 [features]
 default = ["std", "async"]

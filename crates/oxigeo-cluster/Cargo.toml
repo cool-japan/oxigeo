@@ -10,7 +10,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-cluster"
 readme = "README.md"
 keywords = ["gis", "science", "distributed", "cluster", "processing"]
-categories = ["science", "concurrency", "network-programming"]
+categories = ["science::geo", "concurrency", "network-programming"]
 description = "Distributed geospatial processing cluster for OxiGeo"
 
 [dependencies]

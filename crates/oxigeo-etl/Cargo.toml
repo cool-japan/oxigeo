@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-etl"
 readme = "README.md"
 keywords = ["etl", "streaming", "science", "pipeline", "data-processing"]
-categories = ["science", "asynchronous", "data-structures"]
+categories = ["science::geo", "asynchronous", "data-structures"]
 
 [features]
 default = ["std"]

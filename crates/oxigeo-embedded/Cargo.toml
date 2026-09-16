@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-embedded"
 readme = "README.md"
 keywords = ["gdal", "science", "embedded", "no-std", "arm"]
-categories = ["science", "embedded", "no-std"]
+categories = ["science::geo", "embedded", "no-std"]
 
 [features]
 default = ["alloc"]

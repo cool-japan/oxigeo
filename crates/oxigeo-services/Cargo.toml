@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-services"
 readme = "README.md"
 description = "OGC Web Services (WFS, WCS, WPS, CSW) for OxiGeo"
 keywords = ["gis", "science", "ogc", "wfs", "wcs"]
-categories = ["web-programming::http-server", "science"]
+categories = ["web-programming::http-server", "science::geo"]
 
 [features]
 # Pure-Rust default: no network client, no database driver in the closure.

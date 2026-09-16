@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-stac"
 readme = "README.md"
 keywords = ["stac", "science", "catalog", "cloud-native", "gis"]
-categories = ["science", "data-structures", "web-programming"]
+categories = ["science::geo", "data-structures", "web-programming"]
 
 [features]
 default = ["std"]

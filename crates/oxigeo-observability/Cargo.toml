@@ -10,7 +10,7 @@ documentation = "https://docs.rs/oxigeo-observability"
 readme = "README.md"
 description = "OpenTelemetry-based observability, monitoring, and alerting for OxiGeo"
 keywords = ["observability", "opentelemetry", "monitoring", "metrics", "tracing"]
-categories = ["development-tools::profiling", "network-programming", "science"]
+categories = ["development-tools::profiling", "network-programming", "science::geo"]
 
 [dependencies]
 # OpenTelemetry core

@@ -10,7 +10,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-db-connectors"
 readme = "README.md"
 keywords = ["gis", "science", "database", "spatial", "connector"]
-categories = ["database", "science"]
+categories = ["database", "science::geo"]
 description = "Database connectors for OxiGeo (MySQL, SQLite, MongoDB, ClickHouse, TimescaleDB, Cassandra)"
 
 [features]

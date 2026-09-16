@@ -9,7 +9,7 @@ license.workspace = true
 repository.workspace = true
 readme = "README.md"
 keywords = ["oxigeo", "rs3gw", "s3", "science", "network-programming"]
-categories = ["science", "filesystem"]
+categories = ["science::geo", "filesystem"]
 
 [features]
 default = ["local"]

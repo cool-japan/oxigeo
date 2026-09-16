@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-bench"
 readme = "README.md"
 description = "Comprehensive performance profiling and benchmarking suite for OxiGeo"
 keywords = ["benchmark", "profiling", "performance", "science", "gdal"]
-categories = ["development-tools::profiling", "science"]
+categories = ["development-tools::profiling", "science::geo"]
 
 [dependencies]
 # Error handling

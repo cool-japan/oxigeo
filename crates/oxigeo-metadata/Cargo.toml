@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-metadata"
 readme = "README.md"
 keywords = ["metadata", "science", "iso19115", "fgdc", "inspire"]
-categories = ["science", "data-structures", "parser-implementations"]
+categories = ["science::geo", "data-structures", "parser-implementations"]
 
 [features]
 default = ["std"]

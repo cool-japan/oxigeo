@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-server"
 readme = "README.md"
 description = "WMS/WMTS tile server for serving OxiGeo rasters over HTTP"
 keywords = ["gis", "science", "wms", "wmts", "tile-server"]
-categories = ["web-programming::http-server", "science"]
+categories = ["web-programming::http-server", "science::geo"]
 
 [dependencies]
 # Internal dependencies

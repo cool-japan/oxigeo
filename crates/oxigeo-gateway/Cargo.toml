@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-gateway"
 readme = "README.md"
 description = "API gateway for OxiGeo: axum-based HTTP serving layer with rate limiting, JWT/RBAC/MFA authentication, GraphQL (queries/mutations/subscriptions), WebSocket routing, API version negotiation, and load-balanced reverse proxying with health probes and circuit breaking"
 keywords = ["api-gateway", "graphql", "rate-limiting", "authentication", "science"]
-categories = ["api-bindings", "network-programming", "web-programming::http-server", "authentication"]
+categories = ["api-bindings", "network-programming", "web-programming::http-server", "authentication", "science::geo"]
 
 [dependencies]
 # Core dependencies

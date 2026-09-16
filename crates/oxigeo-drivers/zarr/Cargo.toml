@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-zarr"
 readme = "README.md"
 keywords = ["zarr", "array", "multidimensional", "network-programming", "chunked"]
-categories = ["science", "parser-implementations", "encoding", "data-structures"]
+categories = ["science::geo", "parser-implementations", "encoding", "data-structures"]
 
 [features]
 default = ["std", "v2", "v3", "gzip", "zstd", "lz4", "filesystem", "memory"]

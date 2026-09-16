@@ -7,7 +7,7 @@ license.workspace = true
 repository.workspace = true
 description = "Pure-Rust spatial index (R-tree) for OxiGeo vector data"
 keywords = ["geospatial", "spatial-index", "rtree", "vector"]
-categories = ["science", "data-structures"]
+categories = ["science::geo", "data-structures"]
 
 [features]
 default = ["std"]

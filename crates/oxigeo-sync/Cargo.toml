@@ -11,7 +11,7 @@ documentation = "https://docs.rs/oxigeo-sync"
 readme = "README.md"
 description = "Multi-device synchronization with CRDTs, vector clocks, and operational transformation for OxiGeo"
 keywords = ["science", "sync", "crdt", "distributed", "collaboration"]
-categories = ["science", "data-structures", "network-programming"]
+categories = ["science::geo", "data-structures", "network-programming"]
 
 [dependencies]
 # Core dependencies

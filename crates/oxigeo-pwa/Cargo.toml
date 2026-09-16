@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-pwa"
 readme = "README.md"
 keywords = ["pwa", "service-worker", "offline", "science", "wasm"]
-categories = ["wasm", "web-programming", "science"]
+categories = ["wasm", "web-programming", "science::geo"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]

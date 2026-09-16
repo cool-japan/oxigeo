@@ -11,7 +11,7 @@ homepage.workspace = true
 documentation = "https://docs.rs/oxigeo-core"
 readme = "README.md"
 keywords = ["gdal", "science", "gis", "raster", "vector"]
-categories = ["science", "data-structures", "no-std"]
+categories = ["science::geo", "data-structures", "no-std"]
 
 [features]
 default = ["std"]
