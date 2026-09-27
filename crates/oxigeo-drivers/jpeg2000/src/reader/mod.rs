@@ -4,6 +4,7 @@
 
 pub mod functions;
 pub mod functions_2;
+mod openjpeg_tests;
 pub mod types;
 pub mod types_2;
 pub mod types_3;

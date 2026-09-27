@@ -394,6 +394,11 @@ impl MqDecoder {
         // The run-length/aggregation context (17) is initialized to state 3
         self.contexts[ctx::RUN_LENGTH].qe_index = 3;
         self.contexts[ctx::RUN_LENGTH].mps = 0;
+
+        // ISO/IEC 15444-1 Table D.7: the all-zero-neighbourhood significance
+        // context starts in state 4, not 0.
+        self.contexts[ctx::SIG_LL_LH_START].qe_index = 4;
+        self.contexts[ctx::SIG_LL_LH_START].mps = 0;
     }
 
     /// Initialize the decoder registers (INITDEC procedure)
@@ -495,22 +500,20 @@ impl MqDecoder {
         // Subtract Qe from A
         self.a_register = self.a_register.wrapping_sub(qe);
 
-        // Check if C < A (MPS path) or C >= A (conditional exchange)
+        // ISO/IEC 15444-1 Annex C (Figure C.15): the LPS sub-interval is the
+        // lower [0, Qe) part of A, so compare Chigh against Qe, not A.
         let symbol;
-        if (self.c_register >> 16) < self.a_register {
-            // MPS sub-interval
+        if (self.c_register >> 16) < qe {
+            symbol = self.lps_exchange(context_id, &qe_entry);
+            self.renorm_d();
+        } else {
+            self.c_register = self.c_register.wrapping_sub(qe << 16);
             if self.a_register < 0x8000 {
-                // Conditional exchange possible
                 symbol = self.mps_exchange(context_id, &qe_entry);
                 self.renorm_d();
             } else {
                 symbol = ctx.mps;
             }
-        } else {
-            // LPS sub-interval: subtract A from C
-            self.c_register = self.c_register.wrapping_sub(self.a_register << 16);
-            symbol = self.lps_exchange(context_id, &qe_entry);
-            self.renorm_d();
         }
 
         Ok(symbol)
@@ -528,7 +531,8 @@ impl MqDecoder {
                 self.contexts[context_id].mps = 1 - mps;
             }
             self.contexts[context_id].qe_index = entry.next_lps;
-            self.a_register = qe;
+            // MPS_EXCHANGE (ISO/IEC 15444-1 Figure C.16) leaves A unchanged;
+            // only LPS_EXCHANGE sets A = Qe.
             d
         } else {
             // No exchange: output MPS
@@ -803,8 +807,10 @@ mod tests {
         assert_eq!(decoder.contexts[ctx::UNIFORM].qe_index, 46);
         assert_eq!(decoder.contexts[ctx::RUN_LENGTH].qe_index, 3);
 
-        // Regular contexts should be at state 0
-        for i in 0..9 {
+        // Table D.7: the all-zero-neighbourhood significance context starts
+        // in state 4; every other significance context starts in state 0.
+        assert_eq!(decoder.contexts[ctx::SIG_LL_LH_START].qe_index, 4);
+        for i in 1..9 {
             assert_eq!(decoder.contexts[i].qe_index, 0);
         }
     }

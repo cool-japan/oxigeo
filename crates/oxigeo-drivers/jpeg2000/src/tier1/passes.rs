@@ -60,7 +60,10 @@ pub fn significance_propagation_pass(
                 if state.significant {
                     continue;
                 }
-                if !grid.has_significant_4_neighbor(x, y) {
+                // ISO/IEC 15444-1 D.3.1: any significant sample among all 8
+                // neighbours (a non-zero context), diagonals included.
+                let (h, v, d) = grid.neighbor_significance_counts(x, y);
+                if h + v + d == 0 {
                     continue;
                 }
 

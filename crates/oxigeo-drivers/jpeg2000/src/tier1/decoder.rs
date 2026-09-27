@@ -87,10 +87,9 @@ pub fn decode_code_block(
             }
         }
 
-        // If MQ decoder is exhausted, stop
-        if mq.is_exhausted() {
-            break;
-        }
+        // Running past the end of the data is normal: the encoder drops trailing
+        // bytes and the decoder continues on implied 0xFF fill (ISO/IEC 15444-1
+        // C.3.4), so decoding carries on through every bit-plane.
     }
 
     Ok(coefficients)

@@ -5,6 +5,24 @@ All notable changes to OxiGeo will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+- `oxigeo-jpeg2000`: `color::level_shift` now adds the `2^(precision - 1)` DC offset for unsigned components, as ISO/IEC 15444-1 Annex G.1.2 requires; it previously added it only for signed ones, so unsigned images came out shifted down by half their range. The 8-bit output of `Jpeg2000Reader::decode_rgb`, `decode_rgba`, `decode_tile` and `decode_region_from_tiles` for unsigned images changes accordingly: an all-zero-coefficient 8-bit stream now decodes to 128, not 0.
+- `oxigeo-jpeg2000`: `Reversible53::forward_1d`/`forward_2d` now compute the standard 5/3 analysis (Annex F.4.8.2: odd samples first, then even, with whole-sample symmetric extension, columns before rows), matching the corrected inverse below. The previous transform was the mirror image of the standard one, so the coefficients it produces change.
+
+### Fixed
+- `oxigeo-jpeg2000`: codestreams written by other encoders now decode correctly ([#31](https://github.com/cool-japan/oxigeo/issues/31)). Previously any standard codestream, including a lossless 8x8 image from OpenJPEG, decoded to wrong samples with no error. Six departures from ISO/IEC 15444-1 were fixed:
+  - the MQ decoder compared `Chigh` against `A` instead of `Qe` (Annex C.3.2, Figure C.15);
+  - `MPS_EXCHANGE` set `A = Qe`, which only `LPS_EXCHANGE` does (Figure C.16);
+  - the all-zero-neighbourhood significance context started in state 0 instead of 4 (Table D.7);
+  - the LL/LH significance context table merged the `d == 1` and all-zero cases and mislabelled `v == 1` (Table D.1);
+  - the significance propagation pass ignored diagonal neighbours (D.3.1);
+  - the inverse 5/3 wavelet applied its lifting steps in reverse order with flipped signs and edge replication, and processed columns before rows (Annex F.3.8).
+
+  Code-block decoding also no longer stops when the MQ decoder reaches the end of its bytes, since standard streams continue on the implied `0xFF` fill (C.3.4). New regression tests decode OpenJPEG 2.5.4 codestreams (8, 11 and 16-bit, 0 to 5 wavelet levels, odd sizes) and check every sample.
+- `oxigeo-grib`: GRIB2 DRT 5.40 (JPEG2000-packed) fields now decode to the right values ([#31](https://github.com/cool-japan/oxigeo/issues/31)). Besides the decoder fixes above, `decode_jpeg2000_values` never undid the DC level shift, so every value was low by `2^(nbits - 1) * 2^E / 10^D`. ECCC RDPS and HRDPS fields now match ecCodes to float32 precision.
+
 ## [0.2.4] - 2026-08-18
 
 ### Added

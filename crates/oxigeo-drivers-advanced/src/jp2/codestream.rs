@@ -562,7 +562,10 @@ mod tests {
 
     #[test]
     fn test_decode_grayscale_uses_real_decode_path() {
-        let codestream = build_minimal_j2k(4, 4, 1);
+        // An 8x8 image of 200s encoded by OpenJPEG 2.5.4 (see
+        // tests/data/README.md). The removed placeholder filled every pixel
+        // with 128, so decoding the real 200s proves the real decode ran.
+        let codestream = include_bytes!("../../tests/data/const_8x8_u8_l0.j2k").to_vec();
         let mut decoder = CodestreamDecoder::new(codestream);
 
         let data = decoder
@@ -570,20 +573,19 @@ mod tests {
             .expect("decode should succeed via the real JPEG2000 decode chain");
 
         let header = decoder.header().expect("header must be parsed");
-        assert_eq!(header.width, 4);
-        assert_eq!(header.height, 4);
+        assert_eq!(header.width, 8);
+        assert_eq!(header.height, 8);
         assert_eq!(header.num_components, 1);
 
-        assert_eq!(data.len(), 4 * 4 * header.num_components as usize);
-        assert!(
-            !data.iter().all(|&b| b == 128),
-            "decoded data must not be the removed uniform gray placeholder"
-        );
+        assert_eq!(data.len(), 8 * 8);
+        assert!(data.iter().all(|&b| b == 200), "every pixel decodes to 200");
     }
 
     #[test]
     fn test_decode_rgb_uses_real_decode_path() {
-        let codestream = build_minimal_j2k(4, 4, 3);
+        // An 11x7 RGB image encoded by OpenJPEG 2.5.4 with the reversible
+        // colour transform (see tests/data/README.md for its pixel formula).
+        let codestream = include_bytes!("../../tests/data/rgb_11x7_u8_l1.j2k").to_vec();
         let mut decoder = CodestreamDecoder::new(codestream);
 
         let data = decoder
@@ -593,11 +595,20 @@ mod tests {
         let header = decoder.header().expect("header must be parsed");
         assert_eq!(header.num_components, 3);
 
-        assert_eq!(data.len(), 4 * 4 * 3);
-        assert!(
-            !data.iter().all(|&b| b == 128),
-            "decoded data must not be the removed uniform gray placeholder"
-        );
+        assert_eq!(data.len(), 11 * 7 * 3);
+        for y in 0..7usize {
+            for x in 0..11usize {
+                let i = (y * 11 + x) * 3;
+                let want = [
+                    (x * 23 + y * 5) % 256,
+                    (x * 7 + y * 31) % 256,
+                    (x * x + y * 13) % 256,
+                ];
+                for (c, &w) in want.iter().enumerate() {
+                    assert_eq!(usize::from(data[i + c]), w, "pixel ({x}, {y}) channel {c}");
+                }
+            }
+        }
     }
 
     #[test]

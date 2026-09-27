@@ -98,9 +98,8 @@ pub(super) mod tests {
         // raw_codestream should now be stored
         assert!(reader.raw_codestream.is_some());
 
-        // decode_rgb: with zero coefficients and no wavelet levels,
-        // level_shift(0, 8, false) = 0, so all output pixels should be 0
-        // (unsigned, shift=0 → 0 clamped to [0, 255] → 0)
+        // decode_rgb: with zero coefficients and no wavelet levels, every
+        // sample is the unsigned DC offset, level_shift(0, 8, false) = 128.
         let rgb = reader.decode_rgb().expect("decode_rgb failed");
         assert_eq!(rgb.len(), 4 * 4 * 3);
         // All pixels are gray-equivalent (all channel equal)
@@ -125,11 +124,13 @@ pub(super) mod tests {
             .expect("decode_quality_layers failed");
         assert_eq!(layered.len(), 4 * 4 * 3);
 
-        // The old stub would have produced all-128 pixels; the real decode of an
-        // all-zero-coefficient stream yields all-zero pixels.
+        // An all-zero-coefficient stream of an unsigned 8-bit component decodes
+        // to the DC offset, 128, everywhere (ISO/IEC 15444-1 Annex G.1.2). The
+        // old stub produced the same flat 128 for a single layer, so what shows
+        // this is a real decode is the agreement with decode_rgb() below.
         assert!(
-            layered.iter().all(|&p| p == 0),
-            "decode_quality_layers must return real decoded pixels, not the flat-gray stub"
+            layered.iter().all(|&p| p == 128),
+            "an all-zero-coefficient unsigned 8-bit stream must decode to 128"
         );
 
         // Progressive output must agree with the non-progressive decode path.
@@ -310,7 +311,9 @@ pub(super) mod tests {
         use crate::tier1::{CodeBlockDecoder, SubbandType};
         use crate::tier2::layout::code_block_bitplanes;
 
-        let body: [u8; 5] = [0x95, 0x40, 0x22, 0x0C, 0x71];
+        // Arbitrary bytes (not encoder output) chosen because they MQ-decode to
+        // non-zero coefficients, so the wiring check below is not vacuous.
+        let body: [u8; 5] = [0x40, 0x22, 0x0C, 0x71, 0x95];
         // Packet header for a single included code block (1x1 grid):
         //   present=1, inclusion=1, zbp-terminator=1, num_passes(=1)=0,
         //   Lblock comma=0, length(=5)=0b101  =>  0b1110_0101 = 0xE5.

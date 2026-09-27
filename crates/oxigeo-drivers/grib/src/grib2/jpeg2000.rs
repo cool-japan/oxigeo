@@ -135,10 +135,21 @@ fn decode_single_component(codestream: &[u8]) -> Result<Vec<i32>> {
     let components = decode_tile_components(&header.tile_data, &params).map_err(map_j2k_err)?;
 
     // GRIB2 JPEG2000 fields carry a single grayscale component whose samples
-    // are the scaled integer values X.
-    components.into_iter().next().ok_or_else(|| {
+    // are the scaled integer values X. Undo the DC level shift an encoder
+    // applies to unsigned components (ISO/IEC 15444-1 Annex G.1.2).
+    let first = header.image_size.components.first();
+    let precision = first.map(|c| c.precision).unwrap_or(16);
+    let is_signed = first.map(|c| c.is_signed).unwrap_or(false);
+    let mut samples = components.into_iter().next().ok_or_else(|| {
         GribError::DecodingError("DRT 5.40: JPEG2000 decode produced no components".to_string())
-    })
+    })?;
+    if !is_signed && precision > 0 {
+        let shift = 1i32 << (precision - 1);
+        for x in &mut samples {
+            *x += shift;
+        }
+    }
+    Ok(samples)
 }
 
 /// The main-header markers plus the single tile's packet data.

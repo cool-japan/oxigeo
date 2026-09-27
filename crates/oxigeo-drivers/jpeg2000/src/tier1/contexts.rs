@@ -260,21 +260,13 @@ impl StateGrid {
             if v == 2 {
                 ctx::SIG_LL_LH_START + 4
             } else if v == 1 {
-                if d >= 1 {
-                    ctx::SIG_LL_LH_START + 3
-                } else {
-                    ctx::SIG_LL_LH_START + 2
-                }
+                ctx::SIG_LL_LH_START + 3
+            } else if d >= 2 {
+                ctx::SIG_LL_LH_START + 2
+            } else if d == 1 {
+                ctx::SIG_LL_LH_START + 1
             } else {
-                // v == 0
-                if d >= 2 {
-                    ctx::SIG_LL_LH_START + 1
-                } else if d == 1 {
-                    ctx::SIG_LL_LH_START
-                } else {
-                    // All zero neighborhood - zero context
-                    ctx::SIG_LL_LH_START
-                }
+                ctx::SIG_LL_LH_START
             }
         }
     }

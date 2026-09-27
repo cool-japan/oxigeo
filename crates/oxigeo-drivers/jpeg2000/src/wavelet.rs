@@ -25,41 +25,25 @@ pub struct Reversible53;
 impl Reversible53 {
     /// Perform 1D forward transform (analysis) on row/column
     ///
-    /// Splits the signal into low-frequency (even) and high-frequency (odd)
-    /// subbands using the lifting scheme. The transform is perfectly reversible
-    /// with integer arithmetic.
+    /// ISO/IEC 15444-1 Annex F.4.8.2 (equations F-9, F-10) for a signal whose
+    /// first sample is at an even index, with whole-sample symmetric extension
+    /// at both ends. Leaves low-pass samples at even positions and high-pass
+    /// samples at odd positions; [`Self::inverse_1d`] undoes it exactly.
     pub fn forward_1d(data: &mut [i32]) {
         let len = data.len();
         if len < 2 {
             return;
         }
 
-        let half = len.div_ceil(2);
-
-        // Forward update step (update even samples)
-        for i in 0..half {
-            let even_idx = 2 * i;
-            if even_idx == 0 {
-                if len > 1 {
-                    data[even_idx] -= data[1] >> 1;
-                }
-            } else if even_idx + 1 < len {
-                data[even_idx] -= (data[even_idx - 1] + data[even_idx + 1] + 2) >> 2;
-            } else {
-                data[even_idx] -= data[even_idx - 1] >> 1;
-            }
+        // F-9: Y(2n+1) = X(2n+1) - floor((X(2n) + X(2n+2)) / 2)
+        for odd in (1..len).step_by(2) {
+            let o = odd as isize;
+            data[odd] -= (symmetric_at(data, o - 1) + symmetric_at(data, o + 1)) >> 1;
         }
-
-        // Forward predict step (predict odd samples from even)
-        for i in 0..(len / 2) {
-            let odd_idx = 2 * i + 1;
-            let left = data[2 * i];
-            let right = if 2 * i + 2 < len {
-                data[2 * i + 2]
-            } else {
-                data[2 * i]
-            };
-            data[odd_idx] += (left + right) >> 1;
+        // F-10: Y(2n) = X(2n) + floor((Y(2n-1) + Y(2n+1) + 2) / 4)
+        for even in (0..len).step_by(2) {
+            let e = even as isize;
+            data[even] += (symmetric_at(data, e - 1) + symmetric_at(data, e + 1) + 2) >> 2;
         }
     }
 
@@ -77,14 +61,8 @@ impl Reversible53 {
             )));
         }
 
-        // Process rows first (horizontal transform)
-        for y in 0..height {
-            let start = y * width;
-            let end = start + width;
-            Self::forward_1d(&mut data[start..end]);
-        }
-
-        // Process columns (vertical transform)
+        // Columns (vertical) first, then rows: `inverse_2d` undoes them in
+        // the opposite order, so the integer round trip is exact.
         let mut column = vec![0i32; height];
         for x in 0..width {
             for y in 0..height {
@@ -96,42 +74,35 @@ impl Reversible53 {
             }
         }
 
+        for y in 0..height {
+            let start = y * width;
+            let end = start + width;
+            Self::forward_1d(&mut data[start..end]);
+        }
+
         Ok(())
     }
 
     /// Perform 1D inverse transform on row/column
+    ///
+    /// ISO/IEC 15444-1 Annex F.3.8 (equations F-5, F-6) for a signal whose
+    /// first sample is at an even index: low-pass samples sit at even
+    /// positions and high-pass at odd, with whole-sample symmetric extension
+    /// at both ends (`Y(-1) = Y(1)`, `Y(len) = Y(len - 2)`).
     pub fn inverse_1d(data: &mut [i32]) {
         let len = data.len();
         if len < 2 {
             return;
         }
-
-        let half = len.div_ceil(2);
-
-        // Inverse predict step
-        for i in 0..(len / 2) {
-            let odd_idx = 2 * i + 1;
-            let left = data[2 * i];
-            let right = if 2 * i + 2 < len {
-                data[2 * i + 2]
-            } else {
-                data[2 * i]
-            };
-            data[odd_idx] -= (left + right) >> 1;
+        // F-5: X(2n) = Y(2n) - floor((Y(2n-1) + Y(2n+1) + 2) / 4)
+        for even in (0..len).step_by(2) {
+            let e = even as isize;
+            data[even] -= (symmetric_at(data, e - 1) + symmetric_at(data, e + 1) + 2) >> 2;
         }
-
-        // Inverse update step
-        for i in 0..half {
-            let even_idx = 2 * i;
-            if even_idx == 0 {
-                if len > 1 {
-                    data[even_idx] += data[1] >> 1;
-                }
-            } else if even_idx + 1 < len {
-                data[even_idx] += (data[even_idx - 1] + data[even_idx + 1] + 2) >> 2;
-            } else {
-                data[even_idx] += data[even_idx - 1] >> 1;
-            }
+        // F-6: X(2n+1) = Y(2n+1) + floor((X(2n) + X(2n+2)) / 2)
+        for odd in (1..len).step_by(2) {
+            let o = odd as isize;
+            data[odd] += (symmetric_at(data, o - 1) + symmetric_at(data, o + 1)) >> 1;
         }
     }
 
@@ -145,7 +116,13 @@ impl Reversible53 {
             )));
         }
 
-        // Process columns
+        // Rows (horizontal) first, then columns, as in the standard's 2D_SR.
+        for y in 0..height {
+            let start = y * width;
+            let end = start + width;
+            Self::inverse_1d(&mut data[start..end]);
+        }
+
         let mut column = vec![0i32; height];
         for x in 0..width {
             for y in 0..height {
@@ -157,15 +134,24 @@ impl Reversible53 {
             }
         }
 
-        // Process rows
-        for y in 0..height {
-            let start = y * width;
-            let end = start + width;
-            Self::inverse_1d(&mut data[start..end]);
-        }
-
         Ok(())
     }
+}
+
+/// `data[i]` with whole-sample symmetric extension past either end
+/// (`X(-i) = X(i)`, `X(len - 1 + i) = X(len - 1 - i)`), as the 5/3 lifting
+/// steps of ISO/IEC 15444-1 Annex F require. `data` must have at least 2
+/// samples and `i` must lie within one sample of the ends.
+fn symmetric_at(data: &[i32], i: isize) -> i32 {
+    let n = data.len() as isize;
+    let i = if i < 0 {
+        -i
+    } else if i >= n {
+        2 * (n - 1) - i
+    } else {
+        i
+    };
+    data[i as usize]
 }
 
 /// 9/7 irreversible wavelet transform (lossy)

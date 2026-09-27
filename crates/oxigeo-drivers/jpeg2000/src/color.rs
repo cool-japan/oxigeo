@@ -216,7 +216,12 @@ impl ColorConverter {
 
 /// Level shift to convert signed to unsigned
 pub fn level_shift(data: &[i32], precision: u8, is_signed: bool) -> Vec<u8> {
-    let shift = if is_signed { 1 << (precision - 1) } else { 0 };
+    // Unsigned components were DC-shifted down by 2^(precision - 1) before
+    // encoding (ISO/IEC 15444-1 Annex G.1.2), so that offset is added back.
+    // Signed components get the same offset, mapping them into the unsigned
+    // display range.
+    let _ = is_signed;
+    let shift = 1 << (precision - 1);
 
     let max_val = (1 << precision) - 1;
 
@@ -278,6 +283,15 @@ mod tests {
         assert_eq!(result[0], 0);
         assert_eq!(result[1], 128);
         assert_eq!(result[2], 255);
+    }
+
+    #[test]
+    fn test_level_shift_unsigned_adds_dc_offset() {
+        // An unsigned 8-bit component is stored shifted down by 128.
+        let data = vec![-128, 0, 72, 127];
+        let result = level_shift(&data, 8, false);
+
+        assert_eq!(result, vec![0, 128, 200, 255]);
     }
 
     #[test]

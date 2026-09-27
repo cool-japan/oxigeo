@@ -267,7 +267,9 @@ mod color_tests {
 
     #[test]
     fn test_level_shift_unsigned() {
-        let data = vec![0, 128, 255];
+        // Decoded samples of an unsigned component are still DC-shifted down
+        // by 2^(precision - 1) (ISO/IEC 15444-1 Annex G.1.2).
+        let data = vec![-128, 0, 127];
         let result = level_shift(&data, 8, false);
 
         assert_eq!(result[0], 0);
