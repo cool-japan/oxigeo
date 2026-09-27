@@ -68,7 +68,9 @@ pub use decoder::{
 };
 pub use section1::IdentificationSection;
 pub use section3::GridDefinitionSection;
-pub use section4::{EnsembleInfo, ProductDefinitionSection, StatisticalProcessInfo, TimeRangeSpec};
+pub use section4::{
+    EnsembleInfo, ProductDefinitionSection, StatisticalProcessInfo, TimeOffset, TimeRangeSpec,
+};
 pub use section5::DataRepresentationSection;
 pub use section7::DataSection;
 
@@ -216,9 +218,37 @@ impl Grib2Message {
         self.identification.reference_time()
     }
 
-    /// Get forecast offset in hours
+    /// The forecast time as a duration, taking its unit (WMO Code Table 4.4)
+    /// into account, e.g. `forecast_time = 360` in minutes is 6 hours.
+    ///
+    /// `None` for calendar units (months and longer, whose length depends on
+    /// the reference date; see [`ProductDefinitionSection::forecast_offset`]),
+    /// and for a missing or undefined unit.
+    pub fn forecast_offset(&self) -> Option<chrono::Duration> {
+        match self.product_definition.forecast_offset()? {
+            TimeOffset::Fixed(duration) => Some(duration),
+            TimeOffset::Months(_) => None,
+        }
+    }
+
+    /// The forecast time in whole hours (rounded down), taking its unit
+    /// (WMO Code Table 4.4) into account; use [`Self::forecast_offset`] for
+    /// sub-hour precision. A calendar unit is measured from the reference
+    /// time.
+    ///
+    /// If the unit is missing or undefined, or the offset can't be computed,
+    /// this returns the raw `forecast_time`, as earlier versions always did.
     pub fn forecast_offset_hours(&self) -> u32 {
-        self.product_definition.forecast_time
+        let hours = match self.product_definition.forecast_offset() {
+            Some(TimeOffset::Fixed(duration)) => Some(duration.num_hours()),
+            Some(offset @ TimeOffset::Months(_)) => self
+                .reference_time()
+                .and_then(|reference| Some((offset.after(reference)? - reference).num_hours())),
+            None => None,
+        };
+        hours
+            .and_then(|h| u32::try_from(h).ok())
+            .unwrap_or(self.product_definition.forecast_time)
     }
 
     /// Returns `true` if this message carries a statistically-processed field
@@ -240,7 +270,8 @@ impl Grib2Message {
     /// Get valid time.
     ///
     /// For an instantaneous field (PDT 4.0/4.1) this is the reference time
-    /// advanced by the forecast offset. For a statistically-processed field
+    /// advanced by the forecast time in its own unit (WMO Code Table 4.4),
+    /// or `None` if that unit is missing or undefined. For a statistically-processed field
     /// over a time interval (PDT 4.8) the valid time is the *end* of the
     /// overall time interval, so accumulated/averaged quantities are not
     /// mis-reported at the start of their accumulation window.
@@ -249,7 +280,7 @@ impl Grib2Message {
             return Some(end);
         }
         let ref_time = self.reference_time()?;
-        Some(ref_time + chrono::Duration::hours(self.forecast_offset_hours() as i64))
+        self.product_definition.forecast_offset()?.after(ref_time)
     }
 
     /// Decode data values
@@ -283,6 +314,19 @@ mod tests {
     /// be exercised end-to-end on a chosen Data Representation Template.
     fn message_with_drt(
         num_points: u32,
+        section5_payload: &[u8],
+        section7_payload: &[u8],
+    ) -> Vec<u8> {
+        message_with_time(num_points, 1, 0, section5_payload, section7_payload)
+    }
+
+    /// [`message_with_drt`] with the PDT 4.0 forecast time set to
+    /// `forecast_time` in `time_unit` (WMO Code Table 4.4). The reference
+    /// time is 2024-01-01 00:00:00.
+    fn message_with_time(
+        num_points: u32,
+        time_unit: u8,
+        forecast_time: u32,
         section5_payload: &[u8],
         section7_payload: &[u8],
     ) -> Vec<u8> {
@@ -320,7 +364,10 @@ mod tests {
         let mut s4 = Vec::new();
         s4.extend_from_slice(&0u16.to_be_bytes()); // num_coordinates
         s4.extend_from_slice(&0u16.to_be_bytes()); // template 4.0
-        s4.extend_from_slice(&[0u8; 25]); // PDT 4.0 body (first + second surface)
+        s4.extend_from_slice(&[0u8; 8]); // parameter, process, cut-off time
+        s4.push(time_unit); // indicator of unit of time range
+        s4.extend_from_slice(&forecast_time.to_be_bytes()); // forecast time
+        s4.extend_from_slice(&[0u8; 12]); // first + second fixed surface
         data.extend_from_slice(&framed_section(4, &s4));
 
         // Section 5: caller-supplied.
@@ -330,6 +377,80 @@ mod tests {
         data.extend_from_slice(&framed_section(7, section7_payload));
 
         data
+    }
+
+    /// A one-point DRT 5.4 message whose forecast time is `forecast_time`
+    /// in `time_unit`, parsed.
+    fn parsed_with_time(time_unit: u8, forecast_time: u32) -> Grib2Message {
+        let mut s5 = Vec::new();
+        s5.extend_from_slice(&1u32.to_be_bytes()); // num_data_points
+        s5.extend_from_slice(&4u16.to_be_bytes()); // template 5.4
+        s5.push(1); // precision code: IEEE 32-bit
+        let msg = message_with_time(1, time_unit, forecast_time, &s5, &0.0f32.to_be_bytes());
+        Grib2Message::from_bytes(&msg, 0).expect("parse message")
+    }
+
+    fn at(day: u32, month: u32, hour: u32, minute: u32) -> chrono::NaiveDateTime {
+        chrono::NaiveDate::from_ymd_opt(2024, month, day)
+            .expect("valid date")
+            .and_hms_opt(hour, minute, 0)
+            .expect("valid time")
+    }
+
+    /// Forecast times are in the unit given by Code Table 4.4, not always
+    /// hours: HRDPS writes a 6-hour forecast as 360 minutes (#33).
+    #[test]
+    fn test_forecast_time_in_minutes() {
+        let msg = parsed_with_time(0, 360);
+        assert_eq!(msg.forecast_offset(), Some(chrono::Duration::hours(6)));
+        assert_eq!(msg.forecast_offset_hours(), 6);
+        assert_eq!(msg.valid_time(), Some(at(1, 1, 6, 0)));
+    }
+
+    #[test]
+    fn test_forecast_time_below_an_hour_keeps_its_minutes() {
+        let msg = parsed_with_time(0, 30);
+        assert_eq!(msg.forecast_offset(), Some(chrono::Duration::minutes(30)));
+        assert_eq!(msg.forecast_offset_hours(), 0);
+        assert_eq!(msg.valid_time(), Some(at(1, 1, 0, 30)));
+    }
+
+    #[test]
+    fn test_forecast_time_in_hours_is_unchanged() {
+        let msg = parsed_with_time(1, 6);
+        assert_eq!(msg.forecast_offset(), Some(chrono::Duration::hours(6)));
+        assert_eq!(msg.forecast_offset_hours(), 6);
+        assert_eq!(msg.valid_time(), Some(at(1, 1, 6, 0)));
+    }
+
+    #[test]
+    fn test_forecast_time_in_multi_hour_units() {
+        let msg = parsed_with_time(11, 2); // 2 x 6 hours
+        assert_eq!(msg.forecast_offset_hours(), 12);
+        assert_eq!(msg.valid_time(), Some(at(1, 1, 12, 0)));
+    }
+
+    /// A calendar unit has no fixed length, so it is measured from the
+    /// reference time: one month from 2024-01-01 is 31 days.
+    #[test]
+    fn test_forecast_time_in_months() {
+        let msg = parsed_with_time(3, 1);
+        assert_eq!(msg.forecast_offset(), None);
+        assert_eq!(msg.forecast_offset_hours(), 31 * 24);
+        assert_eq!(msg.valid_time(), Some(at(1, 2, 0, 0)));
+    }
+
+    /// A missing unit (255) gives no valid time rather than a guess.
+    #[test]
+    fn test_forecast_time_with_missing_unit() {
+        let msg = parsed_with_time(255, 6);
+        assert_eq!(msg.forecast_offset(), None);
+        assert_eq!(msg.valid_time(), None);
+        assert_eq!(
+            msg.forecast_offset_hours(),
+            6,
+            "falls back to the raw value"
+        );
     }
 
     /// DRT 5.4 IEEE 32-bit floating-point data must round-trip the raw

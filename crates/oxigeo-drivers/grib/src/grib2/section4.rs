@@ -96,6 +96,81 @@ impl StatisticalProcessInfo {
     }
 }
 
+/// A time value converted from its GRIB2 unit (WMO Code Table 4.4).
+///
+/// # Examples
+///
+/// ```
+/// use chrono::{Duration, NaiveDate};
+/// use oxigeo_grib::grib2::TimeOffset;
+///
+/// let reference = NaiveDate::from_ymd_opt(2024, 1, 31)
+///     .and_then(|d| d.and_hms_opt(12, 0, 0))
+///     .ok_or("invalid date")?;
+///
+/// // ECCC HRDPS writes a 6-hour forecast as 360 minutes (unit 0).
+/// let six_hours = TimeOffset::from_code_table_4_4(0, 360).ok_or("unknown unit")?;
+/// assert_eq!(six_hours, TimeOffset::Fixed(Duration::hours(6)));
+/// assert_eq!(six_hours.after(reference), Some(reference + Duration::hours(6)));
+///
+/// // A month (unit 3) follows the calendar: January 31 + 1 month is February 29 in 2024.
+/// let one_month = TimeOffset::from_code_table_4_4(3, 1).ok_or("unknown unit")?;
+/// let feb29 = NaiveDate::from_ymd_opt(2024, 2, 29).and_then(|d| d.and_hms_opt(12, 0, 0));
+/// assert_eq!(one_month.after(reference), feb29);
+///
+/// // 255 means the unit is missing, so there is no offset to apply.
+/// assert_eq!(TimeOffset::from_code_table_4_4(255, 6), None);
+/// # Ok::<(), Box<dyn std::error::Error>>(())
+/// ```
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TimeOffset {
+    /// A unit of fixed length: second, minute, hour, day, or 3, 6 or 12 hours.
+    Fixed(chrono::Duration),
+    /// A calendar unit (month, year, decade, 30-year normal or century),
+    /// expressed in months, since its length depends on the date it starts from.
+    Months(u32),
+}
+
+impl TimeOffset {
+    /// Converts `value`, given in `unit` (WMO Code Table 4.4).
+    ///
+    /// Returns `None` for `255` (missing), for reserved or local codes, and
+    /// for a calendar value too large to count in months.
+    #[must_use]
+    pub fn from_code_table_4_4(unit: u8, value: u32) -> Option<Self> {
+        let seconds = |per_unit: i64| {
+            Some(Self::Fixed(chrono::Duration::seconds(
+                i64::from(value) * per_unit,
+            )))
+        };
+        let months = |per_unit: u32| value.checked_mul(per_unit).map(Self::Months);
+        match unit {
+            0 => seconds(60),          // minute
+            1 => seconds(3_600),       // hour
+            2 => seconds(86_400),      // day
+            3 => months(1),            // month
+            4 => months(12),           // year
+            5 => months(120),          // decade
+            6 => months(360),          // normal (30 years)
+            7 => months(1_200),        // century
+            10 => seconds(3 * 3_600),  // 3 hours
+            11 => seconds(6 * 3_600),  // 6 hours
+            12 => seconds(12 * 3_600), // 12 hours
+            13 => seconds(1),          // second
+            _ => None,
+        }
+    }
+
+    /// `time` advanced by this offset, or `None` if the result is out of range.
+    #[must_use]
+    pub fn after(self, time: chrono::NaiveDateTime) -> Option<chrono::NaiveDateTime> {
+        match self {
+            Self::Fixed(duration) => time.checked_add_signed(duration),
+            Self::Months(months) => time.checked_add_months(chrono::Months::new(months)),
+        }
+    }
+}
+
 /// GRIB2 Section 4: Product Definition Section
 ///
 /// Contains information about the meteorological parameter, forecast time,
@@ -290,6 +365,13 @@ impl ProductDefinitionSection {
         self.statistical_process.is_some()
     }
 
+    /// `forecast_time` converted from its unit, `time_range_unit` (WMO Code
+    /// Table 4.4). `None` if the unit is missing (`255`) or not a defined code.
+    #[must_use]
+    pub fn forecast_offset(&self) -> Option<TimeOffset> {
+        TimeOffset::from_code_table_4_4(self.time_range_unit, self.forecast_time)
+    }
+
     /// Returns the statistical method (WMO Code Table 4.10) for a
     /// time-interval product, if any.
     #[must_use]
@@ -406,6 +488,84 @@ mod tests {
         assert_eq!(ens.perturbation_number, 7);
         assert_eq!(ens.num_forecasts, 20);
         assert!(pds.statistical_process.is_none());
+    }
+
+    #[test]
+    fn test_time_offset_fixed_units() {
+        let cases = [
+            (0u8, 90u32, chrono::Duration::minutes(90)),
+            (1, 6, chrono::Duration::hours(6)),
+            (2, 2, chrono::Duration::days(2)),
+            (10, 3, chrono::Duration::hours(9)),
+            (11, 3, chrono::Duration::hours(18)),
+            (12, 3, chrono::Duration::hours(36)),
+            (13, 45, chrono::Duration::seconds(45)),
+        ];
+        for (unit, value, want) in cases {
+            assert_eq!(
+                TimeOffset::from_code_table_4_4(unit, value),
+                Some(TimeOffset::Fixed(want)),
+                "unit {unit}"
+            );
+        }
+    }
+
+    #[test]
+    fn test_time_offset_calendar_units() {
+        let cases = [
+            (3u8, 2u32, 2u32),
+            (4, 2, 24),
+            (5, 1, 120),
+            (6, 1, 360),
+            (7, 1, 1_200),
+        ];
+        for (unit, value, months) in cases {
+            assert_eq!(
+                TimeOffset::from_code_table_4_4(unit, value),
+                Some(TimeOffset::Months(months)),
+                "unit {unit}"
+            );
+        }
+        // Too many months to count is None, not a wrapped value.
+        assert_eq!(TimeOffset::from_code_table_4_4(7, u32::MAX), None);
+    }
+
+    #[test]
+    fn test_time_offset_missing_and_reserved_units() {
+        for unit in [8u8, 9, 14, 191, 192, 254, 255] {
+            assert_eq!(
+                TimeOffset::from_code_table_4_4(unit, 6),
+                None,
+                "unit {unit}"
+            );
+        }
+    }
+
+    #[test]
+    fn test_time_offset_months_follow_the_calendar() {
+        let jan31 = chrono::NaiveDate::from_ymd_opt(2024, 1, 31)
+            .unwrap()
+            .and_hms_opt(12, 0, 0)
+            .unwrap();
+        let feb29 = chrono::NaiveDate::from_ymd_opt(2024, 2, 29)
+            .unwrap()
+            .and_hms_opt(12, 0, 0)
+            .unwrap();
+        assert_eq!(TimeOffset::Months(1).after(jan31), Some(feb29));
+    }
+
+    #[test]
+    fn test_forecast_offset_reads_the_time_unit() {
+        let mut data = pdt0_bytes(1, 0x00, 0);
+        data[12] = 0; // indicator of unit of time range: minute
+        data[13..17].copy_from_slice(&360u32.to_be_bytes()); // forecast time
+        let pds = ProductDefinitionSection::from_bytes(&data).expect("PDT 4.0 parse failed");
+        assert_eq!(pds.time_range_unit, 0);
+        assert_eq!(pds.forecast_time, 360);
+        assert_eq!(
+            pds.forecast_offset(),
+            Some(TimeOffset::Fixed(chrono::Duration::hours(6)))
+        );
     }
 
     /// PDT 4.8 (statistical processing over a time interval): the common
