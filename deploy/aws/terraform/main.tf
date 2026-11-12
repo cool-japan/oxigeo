@@ -1,6 +1,6 @@
 # OxiGeo AWS Terraform Configuration
 # Main infrastructure configuration
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 terraform {
   required_version = ">= 1.6"

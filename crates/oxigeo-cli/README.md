@@ -303,4 +303,4 @@ Licensed under Apache-2.0. See LICENSE for details.
 
 ## Authors
 
-Copyright © COOLJAPAN OU (Team Kitasan)
+Copyright © COOLJAPAN OU (Team KitaSan)

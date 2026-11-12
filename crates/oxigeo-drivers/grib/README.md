@@ -430,7 +430,7 @@ Contributions are welcome! Please ensure:
 
 This project is licensed under Apache-2.0.
 
-Copyright (c) COOLJAPAN OU (Team Kitasan)
+Copyright (c) COOLJAPAN OU (Team KitaSan)
 
 ## Related Projects
 

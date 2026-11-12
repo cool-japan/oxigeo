@@ -1,7 +1,7 @@
 #!/bin/bash
 # OxiGeo Phase 1 Verification Script
 # Comprehensive verification of all Phase 1 deliverables
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 set -e
 

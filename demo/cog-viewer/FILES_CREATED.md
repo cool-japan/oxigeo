@@ -469,6 +469,6 @@ The application is production-ready and fully deployable to GitHub Pages, Netlif
 
 ---
 
-Created by: COOLJAPAN OU (Team Kitasan)
+Created by: COOLJAPAN OU (Team KitaSan)
 Date: January 28, 2026
 License: Apache-2.0

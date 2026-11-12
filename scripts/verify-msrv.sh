@@ -8,7 +8,7 @@
 # This script never publishes anything and never mutates Cargo.toml —
 # it only reports whether the currently declared MSRV actually builds.
 #
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 # License: Apache-2.0
 
 set -euo pipefail

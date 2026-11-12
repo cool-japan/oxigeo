@@ -126,4 +126,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Apache-2.0
 
-Copyright © 2025 COOLJAPAN OU (Team Kitasan)
+Copyright © 2025 COOLJAPAN OU (Team KitaSan)

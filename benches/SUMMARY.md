@@ -290,7 +290,7 @@ Each benchmark includes:
 
 ## License
 
-Copyright (c) 2026 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2026 COOLJAPAN OU (Team KitaSan)
 
 Licensed under Apache-2.0
 
@@ -298,4 +298,4 @@ Licensed under Apache-2.0
 
 **Created**: 2026-01-25
 **Status**: ✓ Complete and ready for use
-**Maintainer**: COOLJAPAN OU (Team Kitasan)
+**Maintainer**: COOLJAPAN OU (Team KitaSan)

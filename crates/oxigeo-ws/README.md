@@ -205,4 +205,4 @@ Contributions welcome! Please see [CONTRIBUTING.md](../../CONTRIBUTING.md) for g
 
 ## Authors
 
-Copyright © 2026 COOLJAPAN OU (Team Kitasan)
+Copyright © 2026 COOLJAPAN OU (Team KitaSan)

@@ -248,5 +248,5 @@ We thank the security researchers who have responsibly disclosed vulnerabilities
 ---
 
 **Last Updated**: July 2026
-**Author**: COOLJAPAN OU (Team Kitasan)
+**Author**: COOLJAPAN OU (Team KitaSan)
 **License**: Apache-2.0

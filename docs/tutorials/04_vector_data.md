@@ -627,5 +627,5 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)
 Licensed under Apache-2.0

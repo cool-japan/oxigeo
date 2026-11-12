@@ -18,7 +18,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let wfs_info = wfs::ServiceInfo {
         title: "OxiGeo WFS Service".to_string(),
         abstract_text: Some("Web Feature Service for vector data access".to_string()),
-        provider: "COOLJAPAN OU (Team Kitasan)".to_string(),
+        provider: "COOLJAPAN OU (Team KitaSan)".to_string(),
         service_url: "http://localhost:8080/wfs".to_string(),
         versions: vec!["2.0.0".to_string(), "3.0.0".to_string()],
     };
@@ -40,7 +40,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let wcs_info = wcs::ServiceInfo {
         title: "OxiGeo WCS Service".to_string(),
         abstract_text: Some("Web Coverage Service for raster data access".to_string()),
-        provider: "COOLJAPAN OU (Team Kitasan)".to_string(),
+        provider: "COOLJAPAN OU (Team KitaSan)".to_string(),
         service_url: "http://localhost:8080/wcs".to_string(),
         versions: vec!["2.0.1".to_string()],
     };
@@ -68,7 +68,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let wps_info = wps::ServiceInfo {
         title: "OxiGeo WPS Service".to_string(),
         abstract_text: Some("Web Processing Service for geospatial processing".to_string()),
-        provider: "COOLJAPAN OU (Team Kitasan)".to_string(),
+        provider: "COOLJAPAN OU (Team KitaSan)".to_string(),
         service_url: "http://localhost:8080/wps".to_string(),
         versions: vec!["2.0.0".to_string()],
     };
@@ -78,7 +78,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let csw_info = csw::ServiceInfo {
         title: "OxiGeo CSW Service".to_string(),
         abstract_text: Some("Catalog Service for metadata search".to_string()),
-        provider: "COOLJAPAN OU (Team Kitasan)".to_string(),
+        provider: "COOLJAPAN OU (Team KitaSan)".to_string(),
         service_url: "http://localhost:8080/csw".to_string(),
         versions: vec!["2.0.2".to_string()],
     };

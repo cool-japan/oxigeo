@@ -228,7 +228,7 @@ All operations follow strict safety guidelines:
 
 Licensed under Apache-2.0.
 
-Copyright (c) 2024-2026 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2024-2026 COOLJAPAN OU (Team KitaSan)
 
 ## Contributing
 

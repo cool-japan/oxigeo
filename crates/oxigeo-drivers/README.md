@@ -262,5 +262,5 @@ cargo nextest run --all-features -p oxigeo-geotiff
 Licensed under the Apache License, Version 2.0.
 See [LICENSE](../../LICENSE) or <http://www.apache.org/licenses/LICENSE-2.0>.
 
-Copyright © 2026 COOLJAPAN OU (Team Kitasan)
+Copyright © 2026 COOLJAPAN OU (Team KitaSan)
 Repository: <https://github.com/cool-japan/oxigeo>

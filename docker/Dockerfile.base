@@ -1,6 +1,6 @@
 # OxiGeo Base Docker Image
 # Multi-stage build for optimized production images
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 # Stage 1: Builder with full Rust toolchain
 FROM rust:1.89-slim-bookworm AS builder
@@ -109,6 +109,6 @@ ENV RUST_LOG=debug \
 
 LABEL org.opencontainers.image.title="OxiGeo Base Images" \
       org.opencontainers.image.description="Base Docker images for OxiGeo geospatial library" \
-      org.opencontainers.image.vendor="COOLJAPAN OU (Team Kitasan)" \
+      org.opencontainers.image.vendor="COOLJAPAN OU (Team KitaSan)" \
       org.opencontainers.image.source="https://github.com/cool-japan/oxigeo" \
       org.opencontainers.image.licenses="Apache-2.0"

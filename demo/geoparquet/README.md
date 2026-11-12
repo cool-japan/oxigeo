@@ -107,4 +107,4 @@ Useful columns in the VIDA file: `area_in_meters` (Float64), `confidence`
 | `pkg` → symlink | `crates/oxigeo-wasm-geoparquet/pkg` build output        |
 
 Part of [OxiGeo](https://github.com/cool-japan/oxigeo) — Pure-Rust geospatial
-data access by COOLJAPAN OU (Team Kitasan). License: Apache-2.0.
+data access by COOLJAPAN OU (Team KitaSan). License: Apache-2.0.

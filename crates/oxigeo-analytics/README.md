@@ -104,4 +104,4 @@ let surface = kriging.predict(&target_grid)?;
 
 ## License
 
-Apache-2.0 — Copyright (c) COOLJAPAN OU (Team Kitasan)
+Apache-2.0 — Copyright (c) COOLJAPAN OU (Team KitaSan)

@@ -441,6 +441,6 @@ jobs:
 
 ## License
 
-Copyright (c) 2026 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2026 COOLJAPAN OU (Team KitaSan)
 
 Licensed under Apache-2.0

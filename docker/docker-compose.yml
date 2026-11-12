@@ -1,6 +1,6 @@
 # OxiGeo Docker Compose - Production Configuration
 # Multi-service composition for production deployment
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 version: '3.9'
 

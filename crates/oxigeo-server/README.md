@@ -321,4 +321,4 @@ Contributions are welcome! Please see the main OxiGeo repository.
 
 ## Authors
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)

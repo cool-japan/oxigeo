@@ -597,5 +597,5 @@ Once deployed, the demo will be available at:
 
 **Built with:** OxiGeo | Pure Rust | COOLJAPAN Ecosystem
 **License:** Apache-2.0
-**Author:** COOLJAPAN OU (Team Kitasan)
+**Author:** COOLJAPAN OU (Team KitaSan)
 **Date:** January 2026

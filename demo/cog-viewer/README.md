@@ -628,4 +628,4 @@ For questions, issues, or feature requests:
 
 **Built with OxiGeo** | Part of the **COOLJAPAN Pure Rust Ecosystem**
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)

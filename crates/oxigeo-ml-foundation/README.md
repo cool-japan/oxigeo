@@ -172,4 +172,4 @@ Apache-2.0
 
 ## Authors
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)

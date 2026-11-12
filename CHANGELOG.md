@@ -1516,7 +1516,7 @@ C/C++, Rasterio, GeoPandas, and PROJ.
 
 ### Contributors
 
-**Development Team**: COOLJAPAN OU (Team Kitasan)
+**Development Team**: COOLJAPAN OU (Team KitaSan)
 
 ### Acknowledgments
 

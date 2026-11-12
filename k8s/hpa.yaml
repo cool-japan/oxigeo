@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes Horizontal Pod Autoscaler
 # Auto-scaling configuration based on metrics
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler

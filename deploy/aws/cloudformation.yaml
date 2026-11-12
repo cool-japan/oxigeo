@@ -1,6 +1,6 @@
 # OxiGeo AWS CloudFormation Template
 # Deploys OxiGeo server on AWS with ECS Fargate
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 AWSTemplateFormatVersion: '2010-09-09'
 Description: 'OxiGeo Geospatial Server - Complete Infrastructure'

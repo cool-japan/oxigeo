@@ -1,7 +1,7 @@
 #!/bin/bash
 # OxiGeo Status Dashboard Generator
 # Creates a comprehensive status report
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 set -e
 
@@ -299,7 +299,7 @@ python3 -m http.server 8000
 
 ## Project Information
 
-- **Organization**: COOLJAPAN OU (Team Kitasan)
+- **Organization**: COOLJAPAN OU (Team KitaSan)
 - **License**: Apache 2.0 / MIT (dual licensed)
 - **Repository**: https://github.com/cool-japan/oxigeo
 - **Documentation**: https://docs.rs/oxigeo-*

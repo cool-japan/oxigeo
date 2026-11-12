@@ -4,7 +4,7 @@ WebAssembly bindings for querying remote GeoParquet files directly from the
 browser — predicate pushdown over HTTP range requests, no server component.
 
 Part of [OxiGeo](https://github.com/cool-japan/oxigeo), the Pure-Rust
-geospatial data library by COOLJAPAN OU (Team Kitasan).
+geospatial data library by COOLJAPAN OU (Team KitaSan).
 
 ## What it does
 

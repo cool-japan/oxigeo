@@ -161,7 +161,7 @@ def test_module_attributes() -> None:
     """Test module-level attributes."""
     assert hasattr(oxigeo, "__version__")
     assert hasattr(oxigeo, "__author__")
-    assert oxigeo.__author__ == "COOLJAPAN OU (Team Kitasan)"
+    assert oxigeo.__author__ == "COOLJAPAN OU (Team KitaSan)"
 
 
 def test_exception_hierarchy() -> None:

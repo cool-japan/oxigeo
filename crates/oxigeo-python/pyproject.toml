@@ -7,7 +7,7 @@ name = "oxigeo"
 version = "0.2.5"
 description = "Pure Rust geospatial data abstraction library - Python bindings"
 authors = [
-    { name = "COOLJAPAN OU (Team Kitasan)", email = "contact@cooljapan.tech" }
+    { name = "COOLJAPAN OU (Team KitaSan)", email = "contact@cooljapan.tech" }
 ]
 readme = "README.md"
 requires-python = ">=3.9"

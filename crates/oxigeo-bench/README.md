@@ -291,4 +291,4 @@ Contributions are welcome! Please see CONTRIBUTING.md for details.
 
 ## Copyright
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)

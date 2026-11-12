@@ -1,6 +1,6 @@
 # OxiGeo Development Docker Image
 # Full development environment with all tools
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 FROM rust:1.89-bookworm
 
@@ -103,7 +103,7 @@ ARG OXIGEO_VERSION=0.2.0
 
 LABEL org.opencontainers.image.title="OxiGeo Development Environment" \
       org.opencontainers.image.description="Full development environment for OxiGeo with all tools" \
-      org.opencontainers.image.vendor="COOLJAPAN OU (Team Kitasan)" \
+      org.opencontainers.image.vendor="COOLJAPAN OU (Team KitaSan)" \
       org.opencontainers.image.source="https://github.com/cool-japan/oxigeo" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.version="${OXIGEO_VERSION}"

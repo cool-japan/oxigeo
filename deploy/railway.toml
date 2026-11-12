@@ -1,6 +1,6 @@
 # OxiGeo Railway Configuration
 # Configuration for Railway platform deployment
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 [build]
 builder = "DOCKERFILE"

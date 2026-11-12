@@ -1,6 +1,6 @@
 # OxiGeo Google Cloud Deployment Manager Configuration
 # Deploys OxiGeo on GCP with Cloud Run and Cloud SQL
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 imports:
 - path: templates/cloud-run.jinja

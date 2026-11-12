@@ -452,4 +452,4 @@ See [LICENSE](../../LICENSE) for details.
 
 ---
 
-Part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem. Built by Team Kitasan.
+Part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem. Built by Team KitaSan.

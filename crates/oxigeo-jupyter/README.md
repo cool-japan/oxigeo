@@ -377,7 +377,7 @@ Licensed under the Apache License, Version 2.0 ([LICENSE](../../LICENSE) or http
 
 ## Credits
 
-This project is part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem, developed by COOLJAPAN OU (Team Kitasan).
+This project is part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem, developed by COOLJAPAN OU (Team KitaSan).
 
 For more information on the broader OxiGeo project, visit:
 - **Project**: https://github.com/cool-japan/oxigeo

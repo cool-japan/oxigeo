@@ -489,7 +489,7 @@ Contributions are welcome! Please ensure:
 Licensed under Apache-2.0 license.
 
 ```
-Copyright (c) 2024-2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2024-2025 COOLJAPAN OU (Team KitaSan)
 ```
 
 ## Acknowledgments

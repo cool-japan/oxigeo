@@ -11,7 +11,7 @@ This module provides thorough testing of the OxiGeo Python API including:
 - Performance tests
 - Round-trip tests
 
-Author: COOLJAPAN OU (Team Kitasan)
+Author: COOLJAPAN OU (Team KitaSan)
 """
 
 import json
@@ -138,7 +138,7 @@ class TestModuleAttributes:
     def test_author_attribute(self) -> None:
         """Test that __author__ attribute is set correctly."""
         assert hasattr(oxigeo, "__author__")
-        assert oxigeo.__author__ == "COOLJAPAN OU (Team Kitasan)"
+        assert oxigeo.__author__ == "COOLJAPAN OU (Team KitaSan)"
 
     def test_version_function(self) -> None:
         """Test version() function returns consistent version."""

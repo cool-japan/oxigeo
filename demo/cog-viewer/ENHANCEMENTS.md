@@ -436,4 +436,4 @@ Apache-2.0
 
 **Built with OxiGeo** | Part of the **COOLJAPAN Pure Rust Ecosystem**
 
-Copyright (c) 2025-2026 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025-2026 COOLJAPAN OU (Team KitaSan)

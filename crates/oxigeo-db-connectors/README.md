@@ -202,4 +202,4 @@ Apache-2.0
 
 ## Copyright
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)

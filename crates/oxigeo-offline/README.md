@@ -361,4 +361,4 @@ Apache-2.0
 
 ## Author
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)

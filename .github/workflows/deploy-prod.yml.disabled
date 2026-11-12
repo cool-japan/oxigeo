@@ -1,6 +1,6 @@
 # OxiGeo Production Deployment Workflow
 # Deploys to production environment
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 name: Deploy Production
 

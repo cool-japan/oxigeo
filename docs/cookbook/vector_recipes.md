@@ -421,5 +421,5 @@ async fn merge_vector_files(inputs: &[&str], output: &str) -> Result<(), Box<dyn
 
 ---
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)
 Licensed under Apache-2.0

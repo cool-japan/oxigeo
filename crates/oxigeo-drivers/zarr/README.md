@@ -433,7 +433,7 @@ OxiGeo Zarr is part of the COOLJAPAN ecosystem of pure Rust libraries:
 
 ---
 
-**Maintained by**: COOLJAPAN OU (Team Kitasan)
+**Maintained by**: COOLJAPAN OU (Team KitaSan)
 **Repository**: https://github.com/cool-japan/oxigeo
 **Issue Tracker**: https://github.com/cool-japan/oxigeo/issues
 **Discussions**: https://github.com/cool-japan/oxigeo/discussions

@@ -413,7 +413,7 @@ Licensed under the Apache License, Version 2.0 ([LICENSE](../../LICENSE) or http
 
 ## Acknowledgments
 
-Developed as part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem by Team Kitasan.
+Developed as part of the [COOLJAPAN](https://github.com/cool-japan) ecosystem by Team KitaSan.
 
 ---
 

@@ -110,7 +110,7 @@ fn version() -> &'static str {
 fn _oxigeo(m: &Bound<'_, PyModule>) -> PyResult<()> {
     // Register module metadata
     m.add("__version__", oxigeo_core::VERSION)?;
-    m.add("__author__", "COOLJAPAN OU (Team Kitasan)")?;
+    m.add("__author__", "COOLJAPAN OU (Team KitaSan)")?;
 
     // Core functions
     m.add_function(wrap_pyfunction!(open, m)?)?;

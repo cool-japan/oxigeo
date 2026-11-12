@@ -1,6 +1,6 @@
 # OxiGeo CLI Docker Image
 # Provides oxigeo command-line tool for geospatial operations
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 # Build stage
 FROM rust:1.89-slim-bookworm AS builder
@@ -63,7 +63,7 @@ ARG OXIGEO_VERSION=0.2.0
 
 LABEL org.opencontainers.image.title="OxiGeo CLI" \
       org.opencontainers.image.description="Command-line interface for OxiGeo geospatial operations" \
-      org.opencontainers.image.vendor="COOLJAPAN OU (Team Kitasan)" \
+      org.opencontainers.image.vendor="COOLJAPAN OU (Team KitaSan)" \
       org.opencontainers.image.source="https://github.com/cool-japan/oxigeo" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.version="${OXIGEO_VERSION}"

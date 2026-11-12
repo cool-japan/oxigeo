@@ -752,5 +752,5 @@ Licensed under the Apache License, Version 2.0 ([LICENSE](LICENSE)).
 
 ---
 
-**Made with love by [COOLJAPAN OU (Team Kitasan)](https://github.com/cool-japan)**  
+**Made with love by [COOLJAPAN OU (Team KitaSan)](https://github.com/cool-japan)**  
 **Pure Rust · Cloud Native · WebAssembly · Production Enterprise**

@@ -1,6 +1,6 @@
 # OxiGeo Docker Compose - Development Configuration
 # Development environment with hot-reload and debugging tools
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 version: '3.9'
 

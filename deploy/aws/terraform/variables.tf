@@ -1,5 +1,5 @@
 # OxiGeo AWS Terraform Variables
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 variable "aws_region" {
   description = "AWS region for deployment"

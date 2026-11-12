@@ -184,4 +184,4 @@ Contributions welcome! This crate is part of the OxiGeo ecosystem.
 
 ## Authors
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)

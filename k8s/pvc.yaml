@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes Persistent Volume Claims
 # Storage definitions for data persistence
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: v1
 kind: PersistentVolumeClaim

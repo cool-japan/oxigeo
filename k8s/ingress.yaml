@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes Ingress
 # Ingress configuration for external access
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: networking.k8s.io/v1
 kind: Ingress

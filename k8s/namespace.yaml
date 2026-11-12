@@ -1,5 +1,5 @@
 # OxiGeo Kubernetes Namespace
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: v1
 kind: Namespace

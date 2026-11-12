@@ -305,5 +305,5 @@ async fn parallel_download(urls: &[String]) -> Result<Vec<Dataset>, Box<dyn std:
 
 ---
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)
 Licensed under Apache-2.0

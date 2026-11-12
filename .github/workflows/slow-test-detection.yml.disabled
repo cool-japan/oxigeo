@@ -1,7 +1,7 @@
 # OxiGeo Slow Test Detection Workflow
 # Detects and analyzes slow-running tests across GPU and ML packages
 # Generates reports on tests taking longer than 60 seconds
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 name: Slow Test Detection
 

@@ -262,7 +262,7 @@ cargo run --example tile_processing
 
 Licensed under Apache-2.0.
 
-Copyright © 2025 COOLJAPAN OU (Team Kitasan)
+Copyright © 2025 COOLJAPAN OU (Team KitaSan)
 
 ## See Also
 

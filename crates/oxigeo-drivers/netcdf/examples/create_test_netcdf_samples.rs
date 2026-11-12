@@ -348,7 +348,7 @@ fn create_golden_triangle_netcdf(output_path: PathBuf) -> Result<()> {
     )?)?;
     writer.add_global_attribute(Attribute::new(
         "institution",
-        AttributeValue::text("COOLJAPAN OU (Team Kitasan)"),
+        AttributeValue::text("COOLJAPAN OU (Team KitaSan)"),
     )?)?;
     writer.add_global_attribute(Attribute::new(
         "source",
@@ -650,7 +650,7 @@ fn create_iron_belt_netcdf(output_path: PathBuf) -> Result<()> {
     )?)?;
     writer.add_global_attribute(Attribute::new(
         "institution",
-        AttributeValue::text("COOLJAPAN OU (Team Kitasan)"),
+        AttributeValue::text("COOLJAPAN OU (Team KitaSan)"),
     )?)?;
     writer.add_global_attribute(Attribute::new(
         "source",

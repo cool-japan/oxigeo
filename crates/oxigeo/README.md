@@ -142,4 +142,4 @@ OxiGeo is a workspace of **75 crates** organized across:
 
 Licensed under Apache-2.0.
 
-Copyright (c) COOLJAPAN OU (Team Kitasan) — https://github.com/cool-japan
+Copyright (c) COOLJAPAN OU (Team KitaSan) — https://github.com/cool-japan

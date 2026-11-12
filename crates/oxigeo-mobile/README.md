@@ -293,7 +293,7 @@ Licensed under Apache License 2.0. See [LICENSE](../../LICENSE) for details.
 
 ## Authors
 
-Copyright (c) 2026 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2026 COOLJAPAN OU (Team KitaSan)
 
 ## Related Projects
 

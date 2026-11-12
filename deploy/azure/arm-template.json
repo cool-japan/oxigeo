@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "metadata": {
     "description": "OxiGeo Azure Resource Manager Template",
-    "author": "COOLJAPAN OU (Team Kitasan)"
+    "author": "COOLJAPAN OU (Team KitaSan)"
   },
   "parameters": {
     "projectName": {

@@ -496,7 +496,7 @@ If you use OxiGeo in your research, please cite:
 ```bibtex
 @software{oxigeo2026,
   title = {OxiGeo: Pure Rust Geospatial Data Abstraction Library},
-  author = {{COOLJAPAN OU (Team Kitasan)}},
+  author = {{COOLJAPAN OU (Team KitaSan)}},
   year = {2026},
   url = {https://github.com/cool-japan/oxigeo}
 }

@@ -164,7 +164,7 @@ The transformation engine is the pure Rust `OxiProj` (COOLJAPAN cartographic) en
 
 Licensed under Apache-2.0.
 
-Copyright © 2025 COOLJAPAN OU (Team Kitasan)
+Copyright © 2025 COOLJAPAN OU (Team KitaSan)
 
 ## See Also
 

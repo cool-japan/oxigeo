@@ -1,7 +1,7 @@
 #!/bin/bash
 # OxiGeo Demo Deployment Script
 # Automates deployment to various platforms
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 # License: Apache 2.0 / MIT
 
 set -e

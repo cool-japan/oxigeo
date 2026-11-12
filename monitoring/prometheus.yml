@@ -1,6 +1,6 @@
 # OxiGeo Prometheus Configuration
 # Metrics collection and monitoring configuration
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 #
 # Only the `oxigeo-server`, `kubernetes-pods`, `prometheus`, and `grafana` jobs
 # below scrape something OxiGeo itself exposes: `oxigeo-server` serves real

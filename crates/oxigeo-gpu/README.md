@@ -143,4 +143,4 @@ see [`oxigeo-gpu-advanced`](../oxigeo-gpu-advanced).
 
 ## License
 
-Apache-2.0 — Copyright (c) COOLJAPAN OU (Team Kitasan)
+Apache-2.0 — Copyright (c) COOLJAPAN OU (Team KitaSan)

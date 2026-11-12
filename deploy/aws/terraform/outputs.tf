@@ -1,5 +1,5 @@
 # OxiGeo AWS Terraform Outputs
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 output "alb_dns_name" {
   description = "DNS name of the Application Load Balancer"

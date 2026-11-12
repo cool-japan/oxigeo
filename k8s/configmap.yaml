@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes ConfigMap
 # Configuration management for OxiGeo services
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: v1
 kind: ConfigMap

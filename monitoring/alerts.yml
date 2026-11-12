@@ -1,6 +1,6 @@
 # OxiGeo Prometheus Alert Rules
 # Alerting rules for monitoring OxiGeo services
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 #
 # `oxigeo_server_alerts` and `business_alerts` below use metric names emitted
 # directly by `oxigeo-server` itself (see crates/oxigeo-server/src/metrics.rs).

@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes Deployment
 # Server deployment configuration
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: apps/v1
 kind: Deployment

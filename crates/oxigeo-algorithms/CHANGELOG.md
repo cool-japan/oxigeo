@@ -174,4 +174,4 @@ Statistics computation (1M pixels):
 
 Apache-2.0
 
-Copyright © 2025 COOLJAPAN OU (Team Kitasan)
+Copyright © 2025 COOLJAPAN OU (Team KitaSan)

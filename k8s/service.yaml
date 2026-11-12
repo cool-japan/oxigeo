@@ -1,6 +1,6 @@
 # OxiGeo Kubernetes Services
 # Service definitions for OxiGeo components
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 apiVersion: v1
 kind: Service

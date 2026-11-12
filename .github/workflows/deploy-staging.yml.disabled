@@ -1,6 +1,6 @@
 # OxiGeo Staging Deployment Workflow
 # Deploys to staging environment for testing
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 name: Deploy Staging
 

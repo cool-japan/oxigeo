@@ -1,6 +1,6 @@
 # OxiGeo Fly.io Configuration
 # Simple deployment configuration for Fly.io platform
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 app = "oxigeo-server"
 primary_region = "sjc"  # San Jose, California

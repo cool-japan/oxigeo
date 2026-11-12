@@ -1,6 +1,6 @@
 # OxiGeo Docker Image Publishing Workflow
 # Builds and publishes Docker images to GitHub Container Registry
-# Author: COOLJAPAN OU (Team Kitasan)
+# Author: COOLJAPAN OU (Team KitaSan)
 
 name: Docker Publish
 

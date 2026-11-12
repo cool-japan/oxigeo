@@ -174,4 +174,4 @@ Apache-2.0
 
 ## Copyright
 
-Copyright (c) 2024 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2024 COOLJAPAN OU (Team KitaSan)

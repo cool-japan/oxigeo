@@ -432,7 +432,7 @@ git push  # (if using GitHub Pages)
 
 ### Team
 
-- **Author**: COOLJAPAN OU (Team Kitasan)
+- **Author**: COOLJAPAN OU (Team KitaSan)
 - **License**: Apache-2.0
 - **Repository**: https://github.com/cool-japan/oxigeo
 
@@ -472,4 +472,4 @@ The OxiGeo Advanced COG Viewer is a **production-ready**, **feature-rich** web a
 
 **Built with OxiGeo** | Part of the **COOLJAPAN Pure Rust Ecosystem**
 
-Copyright (c) 2025 COOLJAPAN OU (Team Kitasan)
+Copyright (c) 2025 COOLJAPAN OU (Team KitaSan)

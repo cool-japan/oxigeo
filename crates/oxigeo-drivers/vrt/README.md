@@ -373,7 +373,7 @@ Licensed under the Apache License, Version 2.0 ([LICENSE](../../../LICENSE) or h
 
 ## Authors
 
-COOLJAPAN OU (Team Kitasan)
+COOLJAPAN OU (Team KitaSan)
 
 ---
 
